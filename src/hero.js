@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { makeSentinel } from './models.js';
 
+export const HERO_T0 = 26;  // the still images show this exact moment
 const LOT = { x: 17, z: 14 };            // perimeter wall half-extents (m)
 const PATH = { x: 15.2, z: 12.2, r: 3.2, h: 7.5, speed: 4.2 };
 
@@ -264,7 +265,8 @@ function buildHome(scene) {
 
 export function initHero(canvas, { onTick } = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+  const small = Math.min(screen.width, screen.height) < 700;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.5 : 1.75));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.05;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -279,7 +281,7 @@ export function initHero(canvas, { onTick } = {}) {
   const moon = new THREE.DirectionalLight(0xb8c4ff, 2.2);
   moon.position.set(-40, 60, 30);
   moon.castShadow = true;
-  moon.shadow.mapSize.set(2048, 2048);
+  moon.shadow.mapSize.set(small ? 1024 : 1536, small ? 1024 : 1536);
   Object.assign(moon.shadow.camera, { left: -30, right: 30, top: 30, bottom: -30, near: 10, far: 160 });
   moon.shadow.bias = -0.0004;
   scene.add(moon);
@@ -352,7 +354,9 @@ export function initHero(canvas, { onTick } = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const t00 = performance.now();
   const clock = { getElapsedTime: () => (performance.now() - t00) / 1000 };
-  let running = true, visible = true, t0 = 7.2;
+  const q = new URLSearchParams(location.search);
+  const freeze = q.has('freeze') ? parseFloat(q.get('freeze')) : null;
+  let running = true, visible = true, t0 = HERO_T0;
   const tmp = new THREE.Vector3(), tmp2 = new THREE.Vector3();
 
   function frame(t) {
@@ -396,7 +400,8 @@ export function initHero(canvas, { onTick } = {}) {
     if (visible && !document.hidden) frame(t0 + clock.getElapsedTime());
     requestAnimationFrame(loop);
   }
-  if (reduce) { frame(t0 + 9); }
+  if (freeze !== null) { frame(freeze); }
+  else if (reduce) { frame(t0); }
   else loop();
 
   const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });

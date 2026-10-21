@@ -103,7 +103,6 @@ export function initViewer(canvas) {
   }
   show('sentinel');
   loop();
-  // first paint even before scrolled into view
   renderer.render(scene, camera);
   return { show };
 }

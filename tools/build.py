@@ -26,8 +26,8 @@ def seal(name, n):
     svg = svg.replace(' role="img"', ' aria-hidden="true"')
     return re.sub(r' aria-label="[^"]*"', '', svg)
 
-YES = '<svg aria-label="Included"><use href="#i-check"/></svg>'
-NO = '<span class="no" aria-label="Not included">—</span>'
+YES = '<svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span>'
+NO = '<span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span>'
 
 CHIP = '<span class="chip" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>'
 TRI = '<span class="tri" aria-hidden="true"></span>'
@@ -79,6 +79,7 @@ def legal_page(index_html, title, desc, src_file, out_name):
     head = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{desc}">', head)
     head = head.replace(f'<link rel="canonical" href="{SITE}">', f'<link rel="canonical" href="{SITE}{out_name}">')
     head = re.sub(r'<link rel="preload"[^>]*>\n?', '', head)
+    head = head.replace(' data-scene="assets/js/scene.js?v=' + V + '"', '')
     body = f'''<body>{sprite}
 {top}<main id="main" class="on-paper">
 <section class="doc">
@@ -91,6 +92,7 @@ def legal_page(index_html, title, desc, src_file, out_name):
 </section>
 </main>
 {foot}
+<button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 <script src="assets/js/site-lite.js?v={V}" defer></script>
 </body>
 </html>
@@ -101,6 +103,8 @@ def not_found(index_html):
     top, foot, sprite = chrome(index_html)
     head = index_html[:index_html.index('<body>')]
     head = re.sub(r'<title>.*?</title>', '<title>Page not found | AeroHome</title>', head)
+    head = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="This page could not be found. Head back to AeroHome or join the 2026 pilot waitlist.">', head)
+    head = head.replace(' data-scene="assets/js/scene.js?v=' + V + '"', '')
     head = re.sub(r'<link rel="canonical"[^>]*>\n?', '', head)
     head = re.sub(r'<link rel="preload"[^>]*>\n?', '', head)
     # absolute asset paths so the page works from any missing URL depth
@@ -118,15 +122,16 @@ def not_found(index_html):
 </section>
 </main>
 {foot}
+<button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 <script src="assets/js/site-lite.js?v={V}" defer></script>
 </body>
 </html>
 '''
     return add_chips(head + body)
 
-SITE_LITE = r"""(function(){var h=document.getElementById('head'),t=document.querySelector('.totop'),m=document.querySelector('.menu-btn');
-function s(){var y=window.scrollY||0;h.classList.toggle('scrolled',y>8);t.classList.toggle('show',y>900);}
-window.addEventListener('scroll',s,{passive:true});s();t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+SITE_LITE = r"""(function(){var h=document.getElementById('head'),t=document.querySelector('.totop'),m=document.querySelector('.menu-btn');if(!h||!m)return;
+function s(){var y=window.scrollY||0;h.classList.toggle('scrolled',y>8);if(t)t.classList.toggle('show',y>900);}
+window.addEventListener('scroll',s,{passive:true});s();if(t)t.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 function set(o){if(o)document.documentElement.style.setProperty('--drawer-top',Math.max(0,h.getBoundingClientRect().bottom)+'px');document.body.classList.toggle('menu-open',o);m.setAttribute('aria-expanded',String(o));document.documentElement.style.overflow=o?'hidden':'';}
 m.addEventListener('click',function(){set(!document.body.classList.contains('menu-open'));});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});})();
@@ -140,8 +145,10 @@ def main():
         env = dict(os.environ, NODE_PATH=os.path.join(ROOT, 'node_modules'))
         subprocess.run([os.path.join(ROOT, 'node_modules', '.bin', 'esbuild'), os.path.join(SRC, 'main.js'), '--bundle', '--minify',
                         '--format=iife', '--target=es2019', '--outfile=' + os.path.join(ROOT, 'assets', 'js', 'scene.js'), '--log-level=warning'], check=True, env=env)
-    shutil.copy(os.path.join(SRC, 'site.css'), os.path.join(ROOT, 'assets', 'css', 'site.css'))
-    shutil.copy(os.path.join(SRC, 'site.js'), os.path.join(ROOT, 'assets', 'js', 'site.js'))
+    esb = os.environ.get('ESBUILD') or os.path.join(ROOT, 'node_modules', '.bin', 'esbuild')
+    subprocess.run([esb, os.path.join(SRC, 'site.css'), '--minify',
+                    '--outfile=' + os.path.join(ROOT, 'assets', 'css', 'site.css'), '--log-level=warning'], check=True)
+    subprocess.run([esb, os.path.join(SRC, 'site.js'), '--minify', '--target=es2017', '--outfile=' + os.path.join(ROOT, 'assets', 'js', 'site.js'), '--log-level=warning'], check=True)
     write(os.path.join(ROOT, 'assets', 'js', 'site-lite.js'), SITE_LITE)
     idx = render(read(os.path.join(SRC, 'index.html')))
     write(os.path.join(ROOT, 'index.html'), idx)
@@ -149,6 +156,19 @@ def main():
     write(os.path.join(ROOT, 'terms.html'), legal_page(idx, 'Terms of Use', 'The rules for using the AeroHome website and joining the pilot-program waitlist.', 'terms.html', 'terms.html'))
     write(os.path.join(ROOT, '404.html'), not_found(idx))
     open(os.path.join(ROOT, '.nojekyll'), 'w').close()
+    if LAUNCH:
+        write(os.path.join(ROOT, 'robots.txt'), f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n")
+        today = time.strftime('%Y-%m-%d')
+        urls = ''.join(f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>\n" for p in ['', 'privacy.html', 'terms.html'])
+        write(os.path.join(ROOT, 'sitemap.xml'), f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
+        host = re.sub(r'^https?://', '', SITE).strip('/')
+        if not host.endswith('github.io') and '/' not in host:
+            write(os.path.join(ROOT, 'CNAME'), host + '\n')
+    else:
+        write(os.path.join(ROOT, 'robots.txt'), "User-agent: *\nDisallow: /\n")
+        for f in ['sitemap.xml', 'CNAME']:
+            if os.path.exists(os.path.join(ROOT, f)): os.remove(os.path.join(ROOT, f))
+    write(os.path.join(ROOT, 'site.webmanifest'), '{"name":"AeroHome","short_name":"AeroHome","start_url":"./","display":"browser","background_color":"#0b0f19","theme_color":"#0b0f19","icons":[{"src":"assets/img/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/img/icon-512.png","sizes":"512x512","type":"image/png"}]}\n')
     print('built', 'LAUNCH' if LAUNCH else 'PREVIEW', SITE, V)
 
 if __name__ == '__main__':

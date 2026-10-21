@@ -26,7 +26,18 @@
     document.documentElement.style.overflow = open ? 'hidden' : '';
   }
   menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
-  $$('#drawer a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  $$('#drawer a').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = (a.getAttribute('href') || '').slice(1), t = id && document.getElementById(id);
+      setMenu(false);
+      if (!t) return;
+      e.preventDefault();
+      requestAnimationFrame(function () {
+        t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        if (history.replaceState) history.replaceState(null, '', '#' + id);
+      });
+    });
+  });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
   window.addEventListener('resize', function () { if (window.innerWidth > 1080) setMenu(false); });
 
@@ -90,7 +101,19 @@
     (function next() {
       if (n >= 6) { stop(); playBtn.textContent = 'Replay the event'; return; }
       timer = setTimeout(function () { n++; setStep(n); next(); }, n === 0 ? 700 : 2300);
-    })();
+    
+  /* load the 3D scenes once the page itself has finished loading */
+  function loadScene() {
+    var sc = document.createElement('script');
+    sc.src = document.documentElement.getAttribute('data-scene');
+    sc.async = true;
+    document.body.appendChild(sc);
+  }
+  if (document.documentElement.getAttribute('data-scene')) {
+    if (document.readyState === 'complete') setTimeout(loadScene, 300);
+    else window.addEventListener('load', function () { setTimeout(loadScene, 300); });
+  }
+})();
   }
   playBtn.addEventListener('click', play);
   stepBtns.forEach(function (b) { b.addEventListener('click', function () { stop(); setStep(+b.getAttribute('data-step')); }); });
@@ -113,6 +136,7 @@
       document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
     });
     if (focus) t.focus();
+    var stage = $('.stage'); if (stage) stage.setAttribute('data-product', t.getAttribute('data-product'));
     document.dispatchEvent(new CustomEvent('aerohome:product', { detail: t.getAttribute('data-product') }));
   }
   tabs.forEach(function (t, i) {
@@ -183,4 +207,16 @@
   ['#f-name', '#f-email'].forEach(function (s) {
     $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); });
   });
+
+  /* load the 3D scenes once the page itself has finished loading */
+  function loadScene() {
+    var sc = document.createElement('script');
+    sc.src = document.documentElement.getAttribute('data-scene');
+    sc.async = true;
+    document.body.appendChild(sc);
+  }
+  if (document.documentElement.getAttribute('data-scene')) {
+    if (document.readyState === 'complete') setTimeout(loadScene, 300);
+    else window.addEventListener('load', function () { setTimeout(loadScene, 300); });
+  }
 })();

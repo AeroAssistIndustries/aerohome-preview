@@ -1,25 +1,37 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-scene="assets/js/scene.js?v=202610211010">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>AeroHome | Autonomous Perimeter Defense for the American Home</title>
 <meta name="description" content="AeroHome pairs Sentinel, an autonomous patrol drone, with Guardian, an indoor safety robot, and on-device AI that stops intruders at the fence line. American-owned, headquartered in Arizona. 2026 pilot in Phoenix and Dallas–Fort Worth.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0e1526">
+<meta name="theme-color" content="#0b0f19">
+<meta name="format-detection" content="telephone=no">
 <link rel="canonical" href="https://aeroassistindustries.github.io/aerohome-preview/">
-<link rel="icon" type="image/png" href="assets/img/favicon.png">
-<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AeroHome">
 <meta property="og:title" content="AeroHome | Security that doesn't just watch. It defends.">
 <meta property="og:description" content="An autonomous patrol drone outside, a safety robot inside, and on-device AI that stops intruders before a door is touched.">
 <meta property="og:url" content="https://aeroassistindustries.github.io/aerohome-preview/">
 <meta property="og:image" content="https://aeroassistindustries.github.io/aerohome-preview/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A modern Arizona home at dusk with the Sentinel drone patrolling its property line">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AeroHome | Security that doesn't just watch. It defends.">
+<meta name="twitter:description" content="An autonomous patrol drone outside, a safety robot inside, and on-device AI that stops intruders before a door is touched.">
+<meta name="twitter:image" content="https://aeroassistindustries.github.io/aerohome-preview/og.jpg">
+<link rel="preload" as="image" href="assets/img/hero-desktop.jpg" media="(min-width: 701px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/img/hero-mobile.jpg" media="(max-width: 700px)" fetchpriority="high">
 <link rel="preload" href="assets/fonts/oxanium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/plex-sans.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=202610210943">
+<link rel="stylesheet" href="assets/css/site.css?v=202610211010">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AeroHome","url":"https://aeroassistindustries.github.io/aerohome-preview/","logo":"https://aeroassistindustries.github.io/aerohome-preview/assets/img/logo-full.png","email":"info@aeroassist.us","description":"Autonomous drone and robot home security, headquartered in Arizona.","address":{"@type":"PostalAddress","addressRegion":"AZ","addressCountry":"US"}}</script>
 </head>
 <body>
@@ -44,14 +56,14 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="ubar">
+<aside class="ubar" aria-label="About AeroHome">
   <div class="wrap">
     <span class="flags"><img src="assets/img/flag-us.svg" alt="" width="25" height="13"><img src="assets/img/flag-az.svg" alt="" width="20" height="13"></span>
-    <span>American-owned, headquartered in Arizona</span>
+    <span class="ub-long">American-owned, headquartered in Arizona</span><span class="ub-short" aria-hidden="true">American-owned, Arizona HQ</span>
     <span class="hide-sm"><svg width="15" height="15" aria-hidden="true"><use href="#i-shield"/></svg>NDAA §848-compliant hardware</span>
     <span class="end"><i class="dot"></i>2026 pilot now enrolling in Phoenix and Dallas–Fort Worth</span>
   </div>
-</div>
+</aside>
 
 <header class="head" id="head">
   <div class="wrap">
@@ -71,7 +83,7 @@
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
   </div>
 </header>
-<div class="drawer" id="drawer">
+<nav class="drawer" id="drawer" aria-label="Menu">
   <a href="#how">How it works</a>
   <a href="#system">The system</a>
   <a href="#app">The app</a>
@@ -80,7 +92,7 @@
   <a href="#plans">Plans</a>
   <a href="#faq">FAQ</a>
   <a class="btn btn-brass" href="#waitlist">Join the waitlist<span class="chip" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span></a>
-</div>
+</nav>
 
 <main id="main">
 <!-- ============ HERO ============ -->
@@ -309,8 +321,8 @@
       <button type="button" role="tab" id="tab-hub" aria-selected="false" aria-controls="p-hub" data-product="hub" tabindex="-1"><b>Hub</b><span>The brain</span></button>
     </div>
     <div class="sys-grid">
-      <div class="stage">
-        <canvas id="viewer-canvas" aria-label="3D model, drag to turn"></canvas>
+      <div class="stage" data-product="sentinel">
+        <canvas id="viewer-canvas" role="img" aria-label="3D model of the selected AeroHome product. Drag to turn it."></canvas>
         <span class="hint"><svg aria-hidden="true"><use href="#i-drag"/></svg>Drag to turn</span>
       </div>
       <div>
@@ -454,13 +466,13 @@
     </div>
     <div class="day">
       <article class="moment"><time>3:30 p.m.</time><h3>Arrival assurance</h3><p>A short clip and a locked-door confirmation the moment the kids get home from school.</p>
-        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Kids are home. Front door locked.</b></div></div></article>
+        <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Kids are home. Front door locked.</b></div></div></article>
       <article class="moment"><time>5:45 p.m.</time><h3>Pet check-ins</h3><p>Find the dog, see what the cat knocked over, and say hi out loud from anywhere.</p>
-        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Dog found in the living room. Say hi?</b></div></div></article>
+        <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Dog found in the living room. Say hi?</b></div></div></article>
       <article class="moment"><time>7:30 p.m.</time><h3>Elder Watch</h3><p>Gentle check-ins on aging parents' routines, with a two-way video visit from Guardian when something seems off.</p>
-        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Mom's evening routine is on track.</b></div></div></article>
+        <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Mom's evening routine is on track.</b></div></div></article>
       <article class="moment"><time>10:30 p.m.</time><h3>Goodnight sweep</h3><p>Guardian checks every door and window before bed and reports back with a simple all-secure checklist.</p>
-        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Every door and window is secure.</b></div></div></article>
+        <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Every door and window is secure.</b></div></div></article>
     </div>
   </div>
 </section>
@@ -507,7 +519,7 @@
         <a class="btn btn-line" href="#waitlist" data-plan="Essential">Choose Essential<span class="tri" aria-hidden="true"></span></a>
       </article>
       <article class="plan pop">
-        <span class="badge">Most chosen</span>
+        <span class="badge">Recommended</span>
         <h3 class="d3">Plus</h3><p class="tag">Deterrence on autopilot.</p>
         <div class="price"><b>$89</b><span>per month</span></div>
         <ul>
@@ -545,19 +557,19 @@
         <table>
           <thead><tr><th scope="col">Feature</th><th scope="col">Essential<span>$49/mo</span></th><th scope="col">Plus<span>$89/mo</span></th><th scope="col">Total<span>$149/mo</span></th></tr></thead>
           <tbody>
-            <tr><td>AI threat verification</td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Live patrols and app control</td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
+            <tr><td>AI threat verification</td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Live patrols and app control</td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
             <tr><td>Encrypted video history</td><td>30 days</td><td>60 days</td><td>60 days</td></tr>
-            <tr><td>Self-monitoring and smart alerts</td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Smart deterrence automations</td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Family safety suite and Elder Watch</td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Incident reports</td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Extended hardware warranty</td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>24/7 professional monitoring</td><td><span class="no" aria-label="Not included">—</span></td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Agent voice-down deterrence</td><td><span class="no" aria-label="Not included">—</span></td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Verified priority dispatch</td><td><span class="no" aria-label="Not included">—</span></td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Hardware replacement guarantee</td><td><span class="no" aria-label="Not included">—</span></td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
-            <tr><td>Insurance documentation pack</td><td><span class="no" aria-label="Not included">—</span></td><td><span class="no" aria-label="Not included">—</span></td><td><svg aria-label="Included"><use href="#i-check"/></svg></td></tr>
+            <tr><td>Self-monitoring and smart alerts</td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Smart deterrence automations</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Family safety suite and Elder Watch</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Incident reports</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Extended hardware warranty</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>24/7 professional monitoring</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Agent voice-down deterrence</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Verified priority dispatch</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Hardware replacement guarantee</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
+            <tr><td>Insurance documentation pack</td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><span class="no" aria-hidden="true">—</span><span class="sr-only">Not included</span></td><td><svg aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Included</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -649,10 +661,10 @@
       <form novalidate>
         <h3 class="d3">Request early access</h3>
         <p>Free, with no payment now.</p>
-        <div class="f" data-f="name"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><p class="err">Add your name.</p></div>
+        <div class="f" data-f="name"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required><p class="err">Add your name.</p></div>
         <div class="f" data-f="email"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required><p class="err">Add a valid email address, like name@example.com.</p></div>
         <div class="f-row">
-          <div class="f"><label for="f-zip">ZIP code</label><input id="f-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10"></div>
+          <div class="f"><label for="f-zip">ZIP code</label><input id="f-zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="10"></div>
           <div class="f"><label for="f-metro">Metro</label><select id="f-metro" name="metro"><option>Phoenix, AZ</option><option>Dallas–Fort Worth, TX</option><option>Elsewhere, notify me</option></select></div>
         </div>
         <div class="f-row">
@@ -717,7 +729,6 @@
 
 <button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
-<script src="assets/js/site.js?v=202610210943" defer></script>
-<script src="assets/js/scene.js?v=202610210943" defer></script>
+<script src="assets/js/site.js?v=202610211010" defer></script>
 </body>
 </html>
