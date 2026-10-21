@@ -1,0 +1,20 @@
+# AeroHome website
+
+Preview: **https://aeroassistindustries.github.io/aerohome-preview/** (GitHub Pages, published from `main`).
+
+| Path | What it is |
+|---|---|
+| `index.html`, `privacy.html`, `terms.html`, `404.html` | Built pages, served as-is |
+| `assets/` | Styles, fonts (Archivo, Public Sans), images, scripts, and the 3D scene bundle |
+| `src/` | Editable sources: page markup, styles, page script, and the 3D hero and product models |
+| `tools/build.py` | Rebuilds the pages and the 3D bundle from `src/` |
+| `tools/make_art.py` | Generates the flag and seal artwork |
+
+## Rebuild
+
+```
+python3 tools/build.py            # preview build (search engines told not to index)
+python3 tools/build.py --launch   # launch build (indexable)
+```
+
+Set `SITE_URL` to the final address (for example `https://aerohome.us/`) when building for launch, so share links and canonical tags point to the right place.

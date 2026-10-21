@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AeroHome | Autonomous Perimeter Defense for the American Home</title>
+<meta name="description" content="AeroHome pairs Sentinel, an autonomous patrol drone, with Guardian, an indoor safety robot, and on-device AI that stops intruders at the fence line. American-owned, headquartered in Arizona. 2026 pilot in Phoenix and Dallas–Fort Worth.">
+<!--robots-->
+<meta name="theme-color" content="#0e1526">
+<link rel="canonical" href="{{SITE}}">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AeroHome">
+<meta property="og:title" content="AeroHome | Security that doesn't just watch. It defends.">
+<meta property="og:description" content="An autonomous patrol drone outside, a safety robot inside, and on-device AI that stops intruders before a door is touched.">
+<meta property="og:url" content="{{SITE}}">
+<meta property="og:image" content="{{SITE}}og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/public-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css?v={{V}}">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"AeroHome","url":"{{SITE}}","logo":"{{SITE}}assets/img/logo-full.png","email":"info@aeroassist.us","description":"Autonomous drone and robot home security, headquartered in Arizona.","address":{"@type":"PostalAddress","addressRegion":"AZ","addressCountry":"US"}}</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 20 20"><path d="M5.5 5.5l9 9m0-9l-9 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 20 20"><path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-up" viewBox="0 0 20 20"><path d="M10 16V4m-5 5l5-5 5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l7 3v5.5c0 4.6-3 8.3-7 9.5-4-1.2-7-4.9-7-9.5V6z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 3v3.5M15 3v3.5M9 17.5V21M15 17.5V21M3 9h3.5M3 15h3.5M17.5 9H21M17.5 15H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V8a4 4 0 018 0v2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="15.5" r="1.4" fill="currentColor"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18V7m0 7h18v4m0-4v-2.5a3 3 0 00-3-3h-7v5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="7" cy="11" r="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+  <symbol id="i-fence" viewBox="0 0 24 24"><path d="M4 20V8l2-3 2 3v12M16 20V8l2-3 2 3v12M8 10h8M8 16h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-drag" viewBox="0 0 24 24"><path d="M4 12h16M4 12l3-3M4 12l3 3M20 12l-3-3M20 12l-3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6 8 6v8.5a.5.5 0 01-.5.5H15v-5H9v5H4.5a.5.5 0 01-.5-.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6.5" width="12.5" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M15.5 10.5l5-3v9l-5-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16.5V11a6 6 0 0112 0v5.5l1.5 1.5h-15zM10 20.5a2 2 0 004 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="ubar">
+  <div class="wrap">
+    <span class="flags"><img src="assets/img/flag-us.svg" alt="" width="25" height="13"><img src="assets/img/flag-az.svg" alt="" width="20" height="13"></span>
+    <span>American-owned, headquartered in Arizona</span>
+    <span class="hide-sm"><svg width="15" height="15" aria-hidden="true"><use href="#i-shield"/></svg>NDAA §848-compliant hardware</span>
+    <span class="end"><i class="dot"></i>2026 pilot now enrolling in Phoenix and Dallas–Fort Worth</span>
+  </div>
+</div>
+
+<header class="head" id="head">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="AeroHome, back to top">
+      <img class="mark" src="assets/img/mark.png" alt="" width="42" height="38">
+      <img class="word" src="assets/img/wordmark.png" alt="AeroHome" width="66" height="20">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#system">The system</a>
+      <a href="#app">The app</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#plans">Plans</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn-brass btn-sm" href="#waitlist">Join the waitlist</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <a href="#how">How it works</a>
+  <a href="#system">The system</a>
+  <a href="#app">The app</a>
+  <a href="#family">Family</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#plans">Plans</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn btn-brass" href="#waitlist">Join the waitlist</a>
+</div>
+
+<main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-label="AeroHome">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1 class="d1">Security that doesn't just watch. It defends.</h1>
+      <p class="lede">Sentinel, an autonomous patrol drone, sweeps your property line day and night. Guardian, a quiet robot, checks every room inside. On-device AI verifies real threats, and the system confronts intruders before a door is touched.</p>
+      <div class="ctas">
+        <a class="btn btn-brass" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <div class="creds">
+        <div class="cred"><!--svg:seal-american--><span><b>American-owned</b><small>American company</small></span></div>
+        <div class="cred"><!--svg:seal-ndaa--><span><b>NDAA §848</b><small>Compliant hardware</small></span></div>
+        <div class="cred"><!--svg:seal-arizona--><span><b>Arizona</b><small>Headquartered</small></span></div>
+      </div>
+    </div>
+    <aside class="sweep" aria-label="Sentinel status">
+      <header><b>Sentinel 01</b><span class="live">On patrol</span></header>
+      <div class="row1"><span>Perimeter sweep</span><span data-sweep-pct>42%</span></div>
+      <div class="bar"><i data-sweep-bar></i></div>
+      <dl>
+        <dt>Altitude</dt><dd data-sweep-alt>25 ft</dd>
+        <dt>Property line</dt><dd>Geofenced</dd>
+        <dt>Guardian</dt><dd>Goodnight check done</dd>
+        <dt>Zones</dt><dd class="ok">7 of 7 secure</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats" aria-label="Why prevention matters">
+  <div class="wrap">
+    <ol>
+      <li><div class="n">41<small>sec</small></div><p>A burglary happens in the U.S. roughly every 41 seconds, over 2,000 a day.</p></li>
+      <li><div class="n">12<small>in 100</small></div><p>Burglaries police ever solve. Stopping the break-in is the real protection.</p></li>
+      <li><div class="n">83<small>%</small></div><p>Burglars who check for security before trying a home. Most move on.</p></li>
+      <li><div class="n">300<small>%</small></div><p>Higher likelihood of a break-in for homes with no security system.</p></li>
+    </ol>
+    <p class="src fine">Sources: FBI Uniform Crime Reporting (2024), Pew Research, UNC Charlotte offender studies, alarms.org.</p>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="sec on-light mode-cams" id="why">
+  <div class="wrap why-grid">
+    <div>
+      <p class="kicker">Why AeroHome</p>
+      <h2 class="d2">Your cameras record crimes. They don't prevent them.</h2>
+      <p class="lede">Fixed cameras have fixed blind spots, and alarms only sound after someone is already inside. AeroHome was built on one idea: stop the break-in before it starts.</p>
+      <div class="compare compare-cols">
+        <div class="them">
+          <h3>Traditional security</h3>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-x"/></svg>Fixed angles an intruder learns in minutes</li>
+            <li><svg aria-hidden="true"><use href="#i-x"/></svg>The alarm sounds after a door or window is breached</li>
+            <li><svg aria-hidden="true"><use href="#i-x"/></svg>Motion alerts so frequent you learn to ignore them</li>
+            <li><svg aria-hidden="true"><use href="#i-x"/></svg>Footage becomes evidence of a crime already done</li>
+          </ul>
+        </div>
+        <div class="us">
+          <h3>AeroHome</h3>
+          <ul>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>The drone investigates any sound or sensor, anywhere on the lot</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>AI verifies a real person before anyone is woken up</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Spotlight, voice challenge and siren meet intruders at the fence</li>
+            <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verified live video gets priority emergency dispatch</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="plan-card">
+      <div class="seg" role="group" aria-label="Compare coverage">
+        <button type="button" data-mode="cams" aria-pressed="true">Fixed cameras</button>
+        <button type="button" data-mode="ah" aria-pressed="false">AeroHome</button>
+      </div>
+      <svg class="siteplan" viewBox="0 0 640 440" role="img" aria-labelledby="sp-t">
+        <title id="sp-t">Top-down view of a home lot comparing fixed camera coverage with AeroHome's perimeter patrol</title>
+        <defs>
+          <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="rgba(229,72,77,.06)"/><line x1="0" y1="0" x2="0" y2="8" stroke="rgba(229,72,77,.55)" stroke-width="2"/></pattern>
+          <radialGradient id="beam"><stop offset="0" stop-color="#fff4dc" stop-opacity=".95"/><stop offset=".55" stop-color="#ffe2a6" stop-opacity=".35"/><stop offset="1" stop-color="#ffe2a6" stop-opacity="0"/></radialGradient>
+          <filter id="blur4"><feGaussianBlur stdDeviation="4"/></filter>
+        </defs>
+        <rect width="640" height="440" fill="#121a2c"/>
+        <rect x="0" y="384" width="640" height="56" fill="#0b1221"/>
+        <line x1="0" y1="412" x2="640" y2="412" stroke="#3b465f" stroke-width="2" stroke-dasharray="18 14"/>
+        <g opacity=".55"><rect x="-60" y="60" width="110" height="280" rx="4" fill="#18213a"/><rect x="590" y="60" width="110" height="280" rx="4" fill="#18213a"/></g>
+        <!-- lot -->
+        <rect x="70" y="40" width="500" height="320" rx="6" fill="#18233b"/>
+        <rect x="70" y="40" width="500" height="320" rx="6" fill="none" stroke="#5c6a85" stroke-width="4"/>
+        <rect x="455" y="356" width="70" height="8" fill="#18233b"/>
+        <rect x="455" y="250" width="70" height="134" fill="#222c44"/>
+        <rect x="200" y="62" width="128" height="40" rx="3" fill="#0f4c5c" stroke="#2b8fa3"/>
+        <circle cx="120" cy="88" r="20" fill="#26402f"/><circle cx="520" cy="80" r="16" fill="#26402f"/><circle cx="118" cy="300" r="22" fill="#26402f"/><circle cx="388" cy="318" r="14" fill="#26402f"/>
+        <rect x="190" y="128" width="250" height="122" rx="3" fill="#26324d" stroke="#43517a"/>
+        <rect x="440" y="140" width="85" height="100" rx="3" fill="#232e48" stroke="#43517a"/>
+        <path d="M190 190h120M310 128v122M375 128v60" stroke="#3a4769" stroke-width="1.5"/>
+        <!-- fixed cameras -->
+        <g class="cams">
+          <path d="M70 40H250L190 128Z M570 40V150L525 140Z" fill="url(#hatch)"/>
+          <path d="M70 200V360H160L190 250Z" fill="url(#hatch)"/>
+          <g fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.22)">
+            <path d="M190 250L120 360H260Z"/><path d="M440 250L380 360H530Z"/><path d="M190 128L250 40H340Z"/><path d="M525 140L470 40H570Z"/>
+          </g>
+          <g fill="#e6cd92"><circle cx="190" cy="250" r="5"/><circle cx="440" cy="250" r="5"/><circle cx="190" cy="128" r="5"/><circle cx="525" cy="140" r="5"/></g>
+          <path d="M28 300C80 290 130 270 182 236" fill="none" stroke="#ff6b6f" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>
+          <circle cx="28" cy="300" r="7" fill="#ff6b6f"/>
+          <circle cx="190" cy="232" r="9" fill="none" stroke="#ff6b6f" stroke-width="2"/>
+          <g transform="translate(206 270)"><rect width="168" height="28" rx="14" fill="#2a1219" stroke="#ff6b6f"/><text x="84" y="19" text-anchor="middle" fill="#ffb3b5" font-size="13" font-weight="600" font-family="Public Sans, sans-serif">Alarm only after entry</text></g>
+          <g transform="translate(86 152)"><rect width="88" height="24" rx="12" fill="#2a1219"/><text x="44" y="16" text-anchor="middle" fill="#ffb3b5" font-size="12" font-weight="600" font-family="Public Sans, sans-serif">Blind spot</text></g>
+          <g transform="translate(460 60)"><rect width="88" height="24" rx="12" fill="#2a1219"/><text x="44" y="16" text-anchor="middle" fill="#ffb3b5" font-size="12" font-weight="600" font-family="Public Sans, sans-serif">Blind spot</text></g>
+        </g>
+        <!-- AeroHome -->
+        <g class="ah">
+          <path id="loop" d="M100 56H540Q554 56 554 70V330Q554 344 540 344H100Q86 344 86 330V70Q86 56 100 56Z" fill="none" stroke="#4fd1c5" stroke-opacity=".25" stroke-width="10"/>
+          <path class="flow" d="M100 56H540Q554 56 554 70V330Q554 344 540 344H100Q86 344 86 330V70Q86 56 100 56Z" fill="none" stroke="#4fd1c5" stroke-width="2.5"/>
+          <circle cx="44" cy="296" r="46" fill="url(#beam)"/>
+          <circle cx="44" cy="296" r="7" fill="#ff6b6f"/>
+          <g>
+            <g fill="#e6eaf2"><rect x="-7" y="-4" width="14" height="8" rx="3"/><circle cx="-9" cy="-9" r="5" fill="none" stroke="#e6eaf2" stroke-width="1.6"/><circle cx="9" cy="-9" r="5" fill="none" stroke="#e6eaf2" stroke-width="1.6"/><circle cx="-9" cy="9" r="5" fill="none" stroke="#e6eaf2" stroke-width="1.6"/><circle cx="9" cy="9" r="5" fill="none" stroke="#e6eaf2" stroke-width="1.6"/></g>
+            <animateMotion dur="16s" repeatCount="indefinite" rotate="auto"><mpath href="#loop"/></animateMotion>
+          </g>
+          <g transform="translate(100 262)"><rect width="150" height="28" rx="14" fill="#0e2c33" stroke="#4fd1c5"/><text x="75" y="19" text-anchor="middle" fill="#a9f0e9" font-size="13" font-weight="600" font-family="Public Sans, sans-serif">Stopped at the fence</text></g>
+          <g transform="translate(240 150)"><rect width="160" height="28" rx="14" fill="#0e2c33" stroke="#4fd1c5"/><text x="80" y="19" text-anchor="middle" fill="#a9f0e9" font-size="13" font-weight="600" font-family="Public Sans, sans-serif">Full perimeter, 360°</text></g>
+          <g filter="url(#blur4)" opacity=".6"><rect x="596" y="160" width="36" height="60" fill="#5c6a85"/></g>
+          <text x="618" y="244" text-anchor="middle" fill="#7d89a3" font-size="11" font-family="Public Sans, sans-serif">Blurred</text>
+        </g>
+      </svg>
+      <div class="plan-caption" aria-live="polite"><span data-cap>Four fixed cameras, three blind spots, and an alarm that sounds after entry.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section class="sec on-dark" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">How it works</p>
+        <h2 class="d2">From first sound to all-clear in six steps.</h2>
+      </div>
+      <p class="lede">Every event climbs the same ladder, and most end at step four, with the intruder walking away from your fence.</p>
+    </div>
+    <div class="how-grid">
+      <div class="tac" id="tac">
+        <svg viewBox="0 0 640 420" role="img" aria-labelledby="tac-t">
+          <title id="tac-t">Overhead view of a home as AeroHome responds to an event at 2 a.m.</title>
+          <defs>
+            <radialGradient id="tbeam"><stop offset="0" stop-color="#fff4dc" stop-opacity=".9"/><stop offset=".6" stop-color="#ffe2a6" stop-opacity=".25"/><stop offset="1" stop-color="#ffe2a6" stop-opacity="0"/></radialGradient>
+            <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#16213a" stroke-width="1"/></pattern>
+          </defs>
+          <rect width="640" height="420" fill="#0a1120"/>
+          <rect width="640" height="420" fill="url(#grid)"/>
+          <rect x="60" y="34" width="500" height="320" rx="6" fill="#111b30" stroke="#4a5875" stroke-width="3"/>
+          <rect x="185" y="122" width="250" height="122" rx="3" fill="#1b2640" stroke="#3a4769"/>
+          <path d="M185 184h120M305 122v122M370 122v62" stroke="#33405f" stroke-width="1.5"/>
+          <text x="245" y="160" text-anchor="middle" fill="#5f6b86" font-size="11" font-family="Public Sans, sans-serif">Living</text>
+          <text x="338" y="160" text-anchor="middle" fill="#5f6b86" font-size="11" font-family="Public Sans, sans-serif">Kitchen</text>
+          <text x="403" y="160" text-anchor="middle" fill="#5f6b86" font-size="11" font-family="Public Sans, sans-serif">Entry</text>
+          <text x="245" y="222" text-anchor="middle" fill="#5f6b86" font-size="11" font-family="Public Sans, sans-serif">Bedroom</text>
+          <path d="M190 190h110v50H190z" fill="rgba(200,161,90,.06)" stroke="rgba(200,161,90,.35)" stroke-dasharray="4 4"/>
+          <rect x="96" y="66" width="34" height="26" rx="4" fill="#1b2640" stroke="#4a5875"/>
+          <text x="113" y="108" text-anchor="middle" fill="#6c7790" font-size="10.5" font-family="Public Sans, sans-serif">Nest dock</text>
+          <g fill="#4a5875"><circle cx="560" cy="80" r="4"/><circle cx="560" cy="200" r="4"/><circle cx="310" cy="34" r="4"/><circle cx="60" cy="200" r="4"/><circle cx="310" cy="354" r="4"/></g>
+
+          <!-- step 1: detect -->
+          <g data-s="1"><circle cx="560" cy="80" r="14" fill="none" stroke="#e6cd92" stroke-width="2"><animate attributeName="r" values="6;22" dur="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.4s" repeatCount="indefinite"/></circle></g>
+          <g class="move" id="tac-intruder" style="transform: translate(0px,0px)"><g data-s="1"><circle cx="594" cy="72" r="7" fill="#ff6b6f"/></g></g>
+          <!-- step 4 beam (under drone) -->
+          <g data-s="4" data-until="5"><path d="M522 76L584 56L602 92Z" fill="rgba(255,240,210,.18)"/><circle cx="594" cy="74" r="34" fill="url(#tbeam)"/>
+            <path d="M538 60a14 14 0 010 28M546 52a24 24 0 010 44" fill="none" stroke="#e6cd92" stroke-width="1.6" opacity=".8"/></g>
+          <!-- step 3 verify -->
+          <g data-s="3" data-until="4"><path d="M578 56h-6v6M610 56h6v6M578 88h-6v-6M610 88h6v-6" fill="none" stroke="#4fd1c5" stroke-width="2"/>
+            <g transform="translate(470 104)"><rect width="122" height="26" rx="13" fill="#0e2c33" stroke="#4fd1c5"/><text x="61" y="17.5" text-anchor="middle" fill="#a9f0e9" font-size="12" font-weight="600" font-family="Public Sans, sans-serif">Person, 98% sure</text></g></g>
+          <!-- drone -->
+          <g class="move" id="tac-drone" style="transform: translate(0px,0px)">
+            <g transform="translate(113 79)">
+              <circle r="20" fill="rgba(79,209,197,.12)"/>
+              <g fill="none" stroke="#e6eaf2" stroke-width="1.6"><circle cx="-8" cy="-8" r="5"/><circle cx="8" cy="-8" r="5"/><circle cx="-8" cy="8" r="5"/><circle cx="8" cy="8" r="5"/></g>
+              <rect x="-6" y="-4" width="12" height="8" rx="3" fill="#e6eaf2"/>
+            </g>
+          </g>
+          <!-- guardian -->
+          <g class="move" id="tac-guard" style="transform: translate(0px,0px)"><g transform="translate(250 166)"><rect x="-8" y="-6" width="16" height="12" rx="5" fill="#e6cd92"/><circle r="11" fill="none" stroke="#e6cd92" stroke-opacity=".35"/></g></g>
+          <!-- step 5 / 6 badges -->
+          <g data-s="5"><g transform="translate(76 372)"><rect width="196" height="32" rx="16" fill="#1d1426" stroke="#e5484d"/><circle cx="18" cy="16" r="5" fill="#e5484d"/><text x="32" y="21" fill="#ffc9cb" font-size="12.5" font-weight="600" font-family="Public Sans, sans-serif">Live agent on the feed</text></g>
+            <g transform="translate(282 372)"><rect width="120" height="32" rx="16" fill="#1d1426" stroke="#e5484d"/><text x="60" y="21" text-anchor="middle" fill="#ffc9cb" font-size="12.5" font-weight="600" font-family="Public Sans, sans-serif">911 one tap</text></g></g>
+          <g data-s="6"><g transform="translate(412 372)"><rect width="150" height="32" rx="16" fill="#1d2433" stroke="#c8a15a"/><text x="75" y="21" text-anchor="middle" fill="#e6cd92" font-size="12.5" font-weight="600" font-family="Public Sans, sans-serif">Evidence sealed</text></g></g>
+        </svg>
+        <div class="tac-bar"><span data-tac-status>Patrol. Sentinel is docked and Guardian is on its rounds.</span><span class="clock" data-tac-clock>2:12:58 a.m.</span></div>
+      </div>
+      <div>
+        <ol class="steps" id="steps">
+          <li><button type="button" data-step="1"><span class="num">01</span><span><strong class="sh">Detect</strong><span class="sp">A sensor, a sound or a camera detection, like a person at the fence at 2 a.m., creates a candidate event.</span></span></button></li>
+          <li><button type="button" data-step="2"><span class="num">02</span><span><strong class="sh">Investigate</strong><span class="sp">Sentinel launches to the exact zone while Guardian rolls to the nearest room. Eyes on target in seconds.</span></span></button></li>
+          <li><button type="button" data-step="3"><span class="num">03</span><span><strong class="sh">Verify</strong><span class="sp">On-device AI confirms person, vehicle, animal or package. Raccoons never wake you. People do.</span></span></button></li>
+          <li><button type="button" data-step="4"><span class="num">04</span><span><strong class="sh">Deter</strong><span class="sp">The spotlight locks on and a voice challenge announces police contact. Most intruders leave right here.</span></span></button></li>
+          <li><button type="button" data-step="5"><span class="num">05</span><span><strong class="sh">Escalate</strong><span class="sp">Verified live video goes to you and our 24/7 monitoring agents, with one-tap 911 that sends your address and a live-feed link.</span></span></button></li>
+          <li><button type="button" data-step="6"><span class="num">06</span><span><strong class="sh">Document</strong><span class="sp">A multi-angle 4K and thermal record is packaged automatically for police and your insurance claim.</span></span></button></li>
+        </ol>
+        <div class="how-ctl">
+          <button class="btn btn-brass btn-sm" type="button" id="play">Play a 2 a.m. event</button>
+          <span class="note">Or choose any step.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SYSTEM ============ -->
+<section class="sec on-slate" id="system">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">The system</p>
+        <h2 class="d2">Three machines. One system.</h2>
+      </div>
+      <p class="lede">An outdoor patrol drone, an indoor safety robot, and a hub that ties them to the locks, lights and sensors you already own.</p>
+    </div>
+    <div class="sys-tabs" role="tablist" aria-label="AeroHome products">
+      <button type="button" role="tab" id="tab-sentinel" aria-selected="true" aria-controls="p-sentinel" data-product="sentinel"><b>Sentinel</b><span>Outdoor patrol drone</span></button>
+      <button type="button" role="tab" id="tab-guardian" aria-selected="false" aria-controls="p-guardian" data-product="guardian" tabindex="-1"><b>Guardian</b><span>Indoor safety robot</span></button>
+      <button type="button" role="tab" id="tab-hub" aria-selected="false" aria-controls="p-hub" data-product="hub" tabindex="-1"><b>Hub</b><span>The brain</span></button>
+    </div>
+    <div class="sys-grid">
+      <div class="stage">
+        <canvas id="viewer-canvas" aria-label="3D model, drag to turn"></canvas>
+        <span class="hint"><svg aria-hidden="true"><use href="#i-drag"/></svg>Drag to turn</span>
+      </div>
+      <div>
+        <div class="panel" role="tabpanel" id="p-sentinel" aria-labelledby="tab-sentinel">
+          <p class="role">Outdoor patrol drone</p>
+          <h3 class="d2">Sentinel</h3>
+          <p class="desc">Lives in its weatherproof Nest dock in the backyard. On schedule, on a trigger or on demand, it flies a full sweep of your property line, streaming stabilized 4K with thermal night vision, a spotlight and two-way audio.</p>
+          <dl class="specs">
+            <dt>Imaging</dt><dd>4K and thermal, 8× zoom</dd>
+            <dt>Spotlight</dt><dd>1,200 lumens</dd>
+            <dt>Sweep</dt><dd>3 to 6 minutes for a full perimeter, self-charging</dd>
+            <dt>Flight</dt><dd>Geofenced to your property, fully autonomous</dd>
+          </dl>
+        </div>
+        <div class="panel" role="tabpanel" id="p-guardian" aria-labelledby="tab-guardian" hidden>
+          <p class="role">Indoor safety robot</p>
+          <h3 class="d2">Guardian</h3>
+          <p class="desc">A whisper-quiet rover that patrols inside, checks every door and window on its goodnight sweep, investigates sounds, listens for smoke and breaking glass, and lets you say goodnight to the kids from anywhere.</p>
+          <dl class="specs">
+            <dt>Navigation</dt><dd>Room-to-room self-navigation, rising mast camera</dd>
+            <dt>Response</dt><dd>Two-way video, siren and strobe</dd>
+            <dt>Privacy</dt><dd>Physical shutter, bedrooms off-limits by default</dd>
+          </dl>
+        </div>
+        <div class="panel" role="tabpanel" id="p-hub" aria-labelledby="tab-hub" hidden>
+          <p class="role">The brain</p>
+          <h3 class="d2">Hub</h3>
+          <p class="desc">Coordinates both machines with your door and window sensors, locks and lights. Threat verification runs on the Hub itself, so your footage stays home, with cellular and battery backup so cutting the power cuts nothing.</p>
+          <dl class="specs">
+            <dt>On-device AI</dt><dd>Person, vehicle, animal, package</dd>
+            <dt>Resilience</dt><dd>Cellular and battery backup, local recording</dd>
+            <dt>Works with</dt><dd>Your existing locks, lights and sensors</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP ============ -->
+<section class="sec on-light" id="app">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">The app</p>
+        <h2 class="d2">Miles away. Still in command.</h2>
+      </div>
+      <p class="lede">Live aerial video, every door and window, and a one-tap line to 911, from wherever you are.</p>
+    </div>
+    <div class="phones">
+      <figure class="phone-fig">
+        <div class="phone"><div class="screen">
+          <div class="sb"><span>9:41</span><i>5G</i></div>
+          <div class="scr-body">
+            <div class="scr-title"><b>Home</b><span>Phoenix, AZ</span></div>
+            <div class="status"><span class="ring"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><span><b>All secure</b><span>Away mode, armed 6:02 p.m.</span></span></div>
+            <div class="tiles">
+              <div class="tile"><small>Last patrol</small><b>12 min ago</b></div>
+              <div class="tile"><small>Doors and windows</small><b>14 of 14 closed</b></div>
+              <div class="tile"><small>Sentinel</small><b>Docked, 96%</b></div>
+              <div class="tile"><small>Guardian</small><b>Living room</b></div>
+            </div>
+            <div class="minimap"><svg viewBox="0 0 260 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="260" height="150" fill="#111a2c"/><rect x="24" y="16" width="212" height="118" rx="6" fill="none" stroke="#4fd1c5" stroke-width="1.6" stroke-dasharray="4 5"/><rect x="82" y="50" width="96" height="50" rx="3" fill="#1d2840" stroke="#3a4769"/><rect x="178" y="56" width="34" height="40" rx="2" fill="#1a2440" stroke="#3a4769"/><circle cx="46" cy="34" r="7" fill="#4fd1c5"/><circle cx="46" cy="34" r="13" fill="none" stroke="#4fd1c5" stroke-opacity=".35"/></svg></div>
+          </div>
+          <div class="tabbar"><span class="on"><svg aria-hidden="true"><use href="#i-home"/></svg>Home</span><span><svg aria-hidden="true"><use href="#i-video"/></svg>Live</span><span><svg aria-hidden="true"><use href="#i-bell"/></svg>Events</span><span><svg aria-hidden="true"><use href="#i-gear"/></svg>Settings</span></div>
+        </div></div>
+        <figcaption><b>All secure, at a glance</b><span>Away mode, the last patrol and every door and window, from across the country.</span></figcaption>
+      </figure>
+
+      <figure class="phone-fig">
+        <div class="phone"><div class="screen alert-scr">
+          <div class="sb"><span>2:13</span><i>5G</i></div>
+          <div class="scr-body">
+            <div class="alert-top">Person at the east fence</div>
+            <div class="scr-title"><b>Verified intruder</b><span>2:13 a.m.</span></div>
+            <div class="thermal">
+              <svg viewBox="0 0 240 200" aria-hidden="true">
+                <defs><radialGradient id="heat" cx=".5" cy=".38" r=".6"><stop offset="0" stop-color="#fff6c2"/><stop offset=".25" stop-color="#ffd23f"/><stop offset=".55" stop-color="#ff7a2a"/><stop offset=".85" stop-color="#c2185b"/><stop offset="1" stop-color="#4a148c" stop-opacity="0"/></radialGradient></defs>
+                <rect width="240" height="200" fill="#1a0b33"/>
+                <rect y="150" width="240" height="50" fill="#2a1250"/>
+                <path d="M0 140h240v10H0z" fill="#3b1a66"/>
+                <g fill="url(#heat)"><circle cx="128" cy="62" r="15"/><path d="M106 82q22-10 44 0l8 52q-4 6-12 4l-4 52h-10l-2-42-2 42h-10l-4-52q-8 2-12-4z"/></g>
+                <g fill="none" stroke="#4fd1c5" stroke-width="2.5"><path d="M92 40v-10h12M164 40v-10h-12M92 186v10h12M164 186v10h-12"/></g>
+              </svg>
+              <span class="tag">Thermal, Sentinel 01</span>
+            </div>
+            <div class="agent"><span class="av">JM</span><span><b>Monitoring agent on the feed</b><small>Voice challenge delivered</small></span></div>
+            <div class="acts"><span class="call">Call 911</span><span>Talk</span><span>Spotlight</span></div>
+          </div>
+          <div class="tabbar"><span><svg aria-hidden="true"><use href="#i-home"/></svg>Home</span><span class="on"><svg aria-hidden="true"><use href="#i-video"/></svg>Live</span><span><svg aria-hidden="true"><use href="#i-bell"/></svg>Events</span><span><svg aria-hidden="true"><use href="#i-gear"/></svg>Settings</span></div>
+        </div></div>
+        <figcaption><b>An alert that cuts through</b><span>A critical alert breaks through silent mode, with live thermal video and 911 one tap away.</span></figcaption>
+      </figure>
+
+      <figure class="phone-fig">
+        <div class="phone"><div class="screen">
+          <div class="sb"><span>7:05</span><i>5G</i></div>
+          <div class="scr-body">
+            <div class="scr-title"><b>Incident report</b><span>Tonight</span></div>
+            <ol class="tl">
+              <li><time>2:13:07</time><i></i><span><b>Fence sensor, east side</b><span>Candidate event</span></span></li>
+              <li><time>2:13:19</time><i></i><span><b>Sentinel on scene</b><span>4K and thermal recording</span></span></li>
+              <li><time>2:13:24</time><i></i><span><b>Person verified</b><span>On-device AI, 98%</span></span></li>
+              <li><time>2:13:31</time><i></i><span><b>Spotlight and voice challenge</b><span>Agent joined the feed</span></span></li>
+              <li><time>2:14:02</time><i></i><span><b>Intruder left the property</b><span>No entry</span></span></li>
+            </ol>
+            <div class="pkg">
+              <div class="row"><span>Evidence package</span><b>Encrypted</b></div>
+              <div class="row"><span>Camera angles</span><b>3</b></div>
+              <div class="row"><span>Duration</span><b>2 min 34 s</b></div>
+            </div>
+            <div class="pkg-btn">Share with police</div>
+          </div>
+        </div></div>
+        <figcaption><b>Evidence, ready for police</b><span>A timestamped timeline and an encrypted 4K and thermal package that only you can share.</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="install">
+      <div>
+        <h3 class="d3">About 25 minutes from box to armed.</h3>
+      </div>
+      <ol>
+        <li><span class="k">01</span><b>Pair Sentinel up close</b><span>It pairs only with a phone a few feet away, so nobody can claim it from the street.</span></li>
+        <li><span class="k">02</span><b>Set the property line</b><span>Traced from your county parcel record. Sentinel never crosses it, and neighbors are blurred.</span></li>
+        <li><span class="k">03</span><b>Watch the first flight</b><span>Sentinel flies the patrol route it planned, staying 10 feet inside the line.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAMILY ============ -->
+<section class="sec on-paper" id="family">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">More than security</p>
+        <h2 class="d2">Watching over the people inside, too.</h2>
+      </div>
+      <p class="lede">Break-ins are rare. Looking after your family happens every day, and AeroHome helps with both.</p>
+    </div>
+    <div class="day">
+      <article class="moment"><time>3:30 p.m.</time><h3>Arrival assurance</h3><p>A short clip and a locked-door confirmation the moment the kids get home from school.</p>
+        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Kids are home. Front door locked.</b></div></div></article>
+      <article class="moment"><time>5:45 p.m.</time><h3>Pet check-ins</h3><p>Find the dog, see what the cat knocked over, and say hi out loud from anywhere.</p>
+        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Dog found in the living room. Say hi?</b></div></div></article>
+      <article class="moment"><time>7:30 p.m.</time><h3>Elder Watch</h3><p>Gentle check-ins on aging parents' routines, with a two-way video visit from Guardian when something seems off.</p>
+        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Mom's evening routine is on track.</b></div></div></article>
+      <article class="moment"><time>10:30 p.m.</time><h3>Goodnight sweep</h3><p>Guardian checks every door and window before bed and reports back with a simple all-secure checklist.</p>
+        <div class="toast"><img src="assets/img/mark.png" alt=""><div><small><span>AeroHome</span><span>now</span></small><b>Every door and window is secure.</b></div></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section class="sec on-dark" id="privacy">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">Privacy by design</p>
+        <h2 class="d2">Your footage. Your rules.</h2>
+      </div>
+      <p class="lede">A security system should protect your privacy as carefully as your property. These four commitments are built into the hardware, not tucked into a settings menu.</p>
+    </div>
+    <div class="prv">
+      <article><span class="ic"><svg aria-hidden="true"><use href="#i-chip"/></svg></span><div><h3 class="d3">AI runs in your home, not our cloud.</h3><p>Threat verification happens on the Hub, and footage is end-to-end encrypted.</p></div></article>
+      <article><span class="ic"><svg aria-hidden="true"><use href="#i-lock"/></svg></span><div><h3 class="d3">Police get what they need, when you say so.</h3><p>One tap calls 911 with your address and a live-feed link, and an evidence package is ready for responding officers. Otherwise your footage is released only by you or under a lawful order.</p></div></article>
+      <article><span class="ic"><svg aria-hidden="true"><use href="#i-bed"/></svg></span><div><h3 class="d3">Bedrooms are off-limits by default.</h3><p>Guardian's no-go zones are enforced on the device, and its camera shutter is physical and visible.</p></div></article>
+      <article><span class="ic"><svg aria-hidden="true"><use href="#i-fence"/></svg></span><div><h3 class="d3">Neighbors stay out of frame.</h3><p>Sentinel never crosses your property line, and anything beyond it is blurred at capture.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLANS ============ -->
+<section class="sec on-light" id="plans">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">Plans and pricing</p>
+        <h2 class="d2">Serious protection. Straight pricing.</h2>
+      </div>
+      <p class="lede">Choose how far the response goes, from self-monitored patrols to 24/7 agents who step in live. Many insurers discount premiums 5 to 15% for verified, monitored systems.</p>
+    </div>
+    <div class="plans">
+      <article class="plan">
+        <h3 class="d3">Essential</h3><p class="tag">You watch. AeroHome acts.</p>
+        <div class="price"><b>$49</b><span>per month</span></div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>AI threat verification</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Live patrols and app control</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>30-day encrypted video history</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Self-monitoring and smart alerts</li>
+        </ul>
+        <a class="btn btn-line" href="#waitlist" data-plan="Essential">Choose Essential</a>
+      </article>
+      <article class="plan pop">
+        <span class="badge">Most chosen</span>
+        <h3 class="d3">Plus</h3><p class="tag">Deterrence on autopilot.</p>
+        <div class="price"><b>$89</b><span>per month</span></div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Everything in Essential</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Smart deterrence automations</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Family safety suite and Elder Watch</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>60-day video and incident reports</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Extended hardware warranty</li>
+        </ul>
+        <a class="btn btn-brass" href="#waitlist" data-plan="Plus">Choose Plus</a>
+      </article>
+      <article class="plan">
+        <h3 class="d3">Total</h3><p class="tag">Agents on watch, around the clock.</p>
+        <div class="price"><b>$149</b><span>per month</span></div>
+        <ul>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Everything in Plus</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>24/7 professional monitoring</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Agent voice-down deterrence</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Verified priority dispatch</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Hardware replacement guarantee</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Insurance documentation pack</li>
+        </ul>
+        <a class="btn btn-line" href="#waitlist" data-plan="Total">Choose Total</a>
+      </article>
+    </div>
+    <div class="kits">
+      <div><small>Guardian Kit</small><b>$999</b><span>Indoor robot and Hub</span></div>
+      <div><small>Sentinel Kit</small><b>$1,499</b><span>Drone, Nest dock and Hub</span></div>
+      <div><small>AeroHome Complete</small><b>$2,499</b><span>Sentinel, Guardian and Hub</span></div>
+      <div><small>Financing</small><b>from $28/mo</b><span>Any kit, over 36 months</span></div>
+    </div>
+    <details class="cmp">
+      <summary>Compare every feature<svg aria-hidden="true"><use href="#i-plus"/></svg></summary>
+      <div class="tbl">
+        <table>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Essential<span>$49/mo</span></th><th scope="col">Plus<span>$89/mo</span></th><th scope="col">Total<span>$149/mo</span></th></tr></thead>
+          <tbody>
+            <tr><td>AI threat verification</td><td>{{Y}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Live patrols and app control</td><td>{{Y}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Encrypted video history</td><td>30 days</td><td>60 days</td><td>60 days</td></tr>
+            <tr><td>Self-monitoring and smart alerts</td><td>{{Y}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Smart deterrence automations</td><td>{{N}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Family safety suite and Elder Watch</td><td>{{N}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Incident reports</td><td>{{N}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>Extended hardware warranty</td><td>{{N}}</td><td>{{Y}}</td><td>{{Y}}</td></tr>
+            <tr><td>24/7 professional monitoring</td><td>{{N}}</td><td>{{N}}</td><td>{{Y}}</td></tr>
+            <tr><td>Agent voice-down deterrence</td><td>{{N}}</td><td>{{N}}</td><td>{{Y}}</td></tr>
+            <tr><td>Verified priority dispatch</td><td>{{N}}</td><td>{{N}}</td><td>{{Y}}</td></tr>
+            <tr><td>Hardware replacement guarantee</td><td>{{N}}</td><td>{{N}}</td><td>{{Y}}</td></tr>
+            <tr><td>Insurance documentation pack</td><td>{{N}}</td><td>{{N}}</td><td>{{Y}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <div class="calc" id="build">
+      <div class="calc-in">
+        <h3 class="d3">Build your setup</h3>
+        <p>Pick hardware and a plan to see your first-year cost, and what an insurance discount could give back.</p>
+        <fieldset>
+          <legend>Hardware</legend>
+          <div class="chips">
+            <label><input type="radio" name="hw" value="999"><span>Guardian Kit <small>$999</small></span></label>
+            <label><input type="radio" name="hw" value="1499"><span>Sentinel Kit <small>$1,499</small></span></label>
+            <label><input type="radio" name="hw" value="2499" checked><span>Complete <small>$2,499</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Plan</legend>
+          <div class="chips">
+            <label><input type="radio" name="pl" value="49"><span>Essential <small>$49</small></span></label>
+            <label><input type="radio" name="pl" value="89"><span>Plus <small>$89</small></span></label>
+            <label><input type="radio" name="pl" value="149" checked><span>Total <small>$149</small></span></label>
+          </div>
+        </fieldset>
+        <div class="field-row">
+          <div class="field"><label for="prem">Annual home-insurance premium</label><div class="money"><span>$</span><input id="prem" type="text" inputmode="numeric" value="1,800" autocomplete="off"></div></div>
+          <div class="field"><label for="disc">Insurer discount</label><div class="range"><input id="disc" type="range" min="0" max="15" step="1" value="10"><output for="disc" id="disc-o">10%</output></div></div>
+        </div>
+        <label class="check"><input type="checkbox" id="ins" checked>My insurer offers a monitored-system discount</label>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <dl>
+          <dt>Hardware, one time</dt><dd data-o="hw">$2,499.00</dd>
+          <dt>Plan, per year</dt><dd data-o="py">$1,788.00</dd>
+          <div class="total" style="display:contents"><dt>First-year cost</dt><dd data-o="fy">$4,287.00</dd></div>
+          <div class="save" style="display:contents"><dt>Insurance savings, per year</dt><dd data-o="sv">−$180.00</dd></div>
+          <dt>Plan after savings, per month</dt><dd data-o="pm">$134.00</dd>
+        </dl>
+        <p class="fin">Or finance the kit: <b data-o="fk">$69.42/mo</b> over 36 months, <b data-o="fp">$218.42/mo</b> with your plan.</p>
+        <p class="fine">Financing shown before lender charges. Insurance discounts are set by your insurer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="sec on-paper" id="faq">
+  <div class="wrap faq-grid">
+    <div class="faq-aside">
+      <p class="kicker">Questions</p>
+      <h2 class="d2">Straight answers.</h2>
+      <p class="lede">Availability, cost, privacy, and what happens on the night it matters. Anything else, write to us.</p>
+      <div class="row"><a class="btn btn-ink" href="mailto:info@aeroassist.us?subject=AeroHome%20question">Email us</a><a class="btn btn-line" href="#waitlist">Join the waitlist</a></div>
+    </div>
+    <div>
+      <details class="qa"><summary>Where and when can I get AeroHome?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>AeroHome launches in 2026 as a pilot program in Dallas–Fort Worth and Phoenix, limited to the first 500 homes. Join the waitlist to hold a place. If you live elsewhere, choose “Elsewhere, notify me” and we'll tell you when AeroHome reaches your area.</p></details>
+      <details class="qa"><summary>What does it cost?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Hardware is $999 for the Guardian Kit, $1,499 for the Sentinel Kit or $2,499 for AeroHome Complete, and any kit can be financed over 36 months from about $28 a month. Plans are $49, $89 or $149 a month. Use <a href="#build">Build your setup</a> to see a first-year total.</p></details>
+      <details class="qa"><summary>Will it wake me up every time a raccoon crosses the yard?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>No. The Hub's on-device AI sorts every detection into person, vehicle, animal or package. You're alerted when a real person is verified, not for every motion event.</p></details>
+      <details class="qa"><summary>Can I share footage with police?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Yes. One tap calls 911 with your address and a live-feed link, and a documented 4K and thermal evidence package is ready for the officers who respond. The Total plan adds verified priority dispatch. Otherwise, your footage is released only by you or under a lawful order.</p></details>
+      <details class="qa"><summary>Does the drone fly over my neighbors?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>No. Sentinel is geofenced to your property and never crosses your property line. Anything the camera sees beyond it is blurred at capture.</p></details>
+      <details class="qa"><summary>What happens if someone cuts the power or the internet?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>The Hub has cellular and battery backup and records locally, so cutting the power or the internet line doesn't switch the system off.</p></details>
+      <details class="qa"><summary>Will the robot go into bedrooms?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Not by default. Bedrooms are no-go zones enforced on the device, and Guardian's camera has a physical shutter you can see.</p></details>
+      <details class="qa"><summary>Will it lower my home-insurance premium?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>It may. Many insurers discount premiums 5 to 15% for verified, monitored systems, and the Total plan includes 24/7 professional monitoring and an insurance documentation pack. Check with your carrier for your exact discount.</p></details>
+      <details class="qa"><summary>What do waitlist members get?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Priority installation, founder pricing and 60 days of the Total plan free. Joining the waitlist is free and doesn't commit you to buy.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WAITLIST ============ -->
+<section class="sec on-dark wl" id="waitlist">
+  <div class="wrap wl-grid">
+    <div>
+      <p class="kicker">2026 pilot program</p>
+      <h2 class="d2">Be one of the first 500 homes.</h2>
+      <p class="lede">AeroHome launches in Phoenix and Dallas–Fort Worth. Waitlist members get:</p>
+      <ul class="perks">
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>Priority installation</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>Founder pricing</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>60 days of Total monitoring, free</li>
+      </ul>
+      <div class="metros">
+        <div class="metro"><b>Phoenix</b><span>Arizona</span><br><em>Enrolling</em></div>
+        <div class="metro"><b>Dallas–Fort Worth</b><span>Texas</span><br><em>Enrolling</em></div>
+      </div>
+      <p class="note">Somewhere else? Choose “Elsewhere, notify me” and we'll tell you when AeroHome reaches your area.</p>
+    </div>
+    <div class="form" id="wl-form">
+      <form novalidate>
+        <h3 class="d3">Request early access</h3>
+        <p>Free, with no payment now.</p>
+        <div class="f" data-f="name"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required><p class="err">Add your name.</p></div>
+        <div class="f" data-f="email"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required><p class="err">Add a valid email address, like name@example.com.</p></div>
+        <div class="f-row">
+          <div class="f"><label for="f-zip">ZIP code</label><input id="f-zip" name="zip" inputmode="numeric" autocomplete="postal-code" maxlength="10"></div>
+          <div class="f"><label for="f-metro">Metro</label><select id="f-metro" name="metro"><option>Phoenix, AZ</option><option>Dallas–Fort Worth, TX</option><option>Elsewhere, notify me</option></select></div>
+        </div>
+        <div class="f-row">
+          <div class="f"><label for="f-hw">Hardware</label><select id="f-hw" name="hw"><option>Not sure yet</option><option>Guardian Kit</option><option>Sentinel Kit</option><option>AeroHome Complete</option></select></div>
+          <div class="f"><label for="f-plan">Plan</label><select id="f-plan" name="plan"><option>Not sure yet</option><option>Essential</option><option>Plus</option><option>Total</option></select></div>
+        </div>
+        <button class="btn btn-brass" type="submit">Request early access</button>
+        <p class="after">We'll email you when installation opens in your area.</p>
+      </form>
+      <div class="sent" role="status">
+        <span class="ok"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+        <h3 class="d3">Your request is ready to send.</h3>
+        <p>Your email app opened with the details filled in. Press send there to hold your place. If it didn't open, email <a href="mailto:info@aeroassist.us?subject=AeroHome%20waitlist">info@aeroassist.us</a> with “AeroHome waitlist” in the subject.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="stripe"></div>
+  <div class="wrap">
+    <div class="pride">
+      <div>
+        <div class="flags"><img src="assets/img/flag-us.svg" alt="Flag of the United States" width="65" height="34"><img src="assets/img/flag-az.svg" alt="Flag of Arizona" width="51" height="34"><span>Headquartered in<br>Arizona, USA</span></div>
+        <h2 class="d2">American-owned. Arizona-proud. Built to defend the home.</h2>
+        <p>AeroHome is an American security company headquartered in Arizona, building protection for the families and homes that keep this country running.</p>
+      </div>
+      <div class="seals">
+        <figure><!--svg:seal-american--><figcaption>American company</figcaption></figure>
+        <figure><!--svg:seal-ndaa--><figcaption>NDAA §848 compliant</figcaption></figure>
+        <figure><!--svg:seal-arizona--><figcaption>Arizona headquartered</figcaption></figure>
+      </div>
+    </div>
+    <div class="reg">
+      <h2>Regulatory and compliance</h2>
+      <div class="reg-grid">
+        <article class="ok"><b>NDAA §848</b><em>Compliant</em><p>Secure supply chain with no covered foreign-made drone components, per Section 848 of the FY2020 National Defense Authorization Act.</p></article>
+        <article><b>FAA</b><em>Part 107 and Remote ID</em><p>Flights follow FAA rules and broadcast Remote ID. Operating approvals are part of every install.</p></article>
+        <article><b>FCC</b><em>Part 15, in certification</em><p>Radio and electronics are being certified for U.S. sale. No FCC ID is claimed until it is granted.</p></article>
+        <article><b>CE</b><em>Planned for EU</em><p>CE conformity is planned for any future EU sale. The CE mark is not shown or claimed today.</p></article>
+      </div>
+    </div>
+    <div class="links">
+      <div class="fb">
+        <img src="assets/img/logo-full.png" alt="AeroHome" width="132" height="128">
+        <p>Autonomous drone and robot home security. A patrol drone outside, a safety robot inside, and on-device AI that verifies a real threat before anyone is woken up.</p>
+        <p>Pilot program: Phoenix and Dallas–Fort Worth<br><a href="mailto:info@aeroassist.us">info@aeroassist.us</a></p>
+      </div>
+      <nav aria-label="Product"><h2>Product</h2><ul><li><a href="#how">How it works</a></li><li><a href="#system">The system</a></li><li><a href="#app">The app</a></li><li><a href="#family">Family features</a></li><li><a href="#plans">Plans and pricing</a></li><li><a href="#build">Build your setup</a></li></ul></nav>
+      <nav aria-label="Company"><h2>Company</h2><ul><li><a href="#privacy">Privacy by design</a></li><li><a href="#faq">FAQ</a></li><li><a href="#waitlist">Join the waitlist</a></li><li><a href="mailto:info@aeroassist.us">Contact</a></li></ul></nav>
+      <nav aria-label="Legal"><h2>Legal</h2><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Use</a></li></ul></nav>
+    </div>
+    <div class="legal">
+      <p>AeroHome is a deterrence aid, not a guarantee of safety. Crime statistics come from FBI Uniform Crime Reporting and the studies cited on this site. Plan features, prices and availability describe the 2026 pilot program.</p>
+      <p>Company names, product names, logos and trademarks mentioned on this site belong to their respective owners and are used for identification and reference only. Unless stated otherwise, their use does not imply affiliation with, sponsorship by, or endorsement from the trademark holders.</p>
+      <p>AeroHome is an independent American company.</p>
+      <div class="bottom"><span>© 2026 AeroHome. All rights reserved.</span><span><span class="us"><img src="assets/img/flag-us.svg" alt="" width="21" height="11">An American company</span><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></span></div>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+
+<script src="assets/js/site.js?v={{V}}" defer></script>
+<script src="assets/js/scene.js?v={{V}}" defer></script>
+</body>
+</html>

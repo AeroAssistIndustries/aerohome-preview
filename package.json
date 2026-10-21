@@ -1,0 +1,9 @@
+{
+  "name": "aerohome-site",
+  "private": true,
+  "description": "AeroHome website sources",
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "three": "0.186.1"
+  }
+}
