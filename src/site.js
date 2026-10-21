@@ -159,8 +159,6 @@
     out('fy', whole(hw + pl * 12));
     out('sv', save ? '−' + whole(save) : '$0');
     out('pm', fmt(Math.max(0, pl - save / 12)));
-    out('fk', fmt(hw / 36) + '/mo');
-    out('fp', fmt(hw / 36 + pl) + '/mo');
   }
   $$('#build input').forEach(function (i) { i.addEventListener('input', calc); i.addEventListener('change', calc); });
   prem.addEventListener('blur', function () {
@@ -191,18 +189,24 @@
     });
     if (!nOk) { name.focus(); ok = false; } else if (!eOk) { email.focus(); ok = false; } else if (!zOk) { zip.focus(); ok = false; }
     if (!ok) return;
-    var f = new FormData(form);
-    var body = [
-      'Name: ' + f.get('name'),
-      'Email: ' + f.get('email'),
-      'ZIP code: ' + (f.get('zip') || ''),
-      'Metro: ' + f.get('metro'),
-      'Hardware: ' + f.get('hw'),
-      'Plan: ' + f.get('plan')
-    ].join('\n');
-    window.location.href = 'mailto:info@aeroassist.us?subject=' + encodeURIComponent('AeroHome waitlist') + '&body=' + encodeURIComponent(body);
-    box.classList.add('done');
-    var sh = $('#sent-h'); if (sh) sh.focus();
+    var f = new FormData(form), payload = {};
+    f.forEach(function (v, k) { payload[k] = String(v).trim(); });
+    payload.source = location.hostname;
+    var submit = $('button[type=submit]', form), err = $('#wl-err');
+    submit.disabled = true; submit.setAttribute('aria-busy', 'true'); err.hidden = true;
+    var label = submit.firstChild.textContent; submit.firstChild.textContent = 'Sending…';
+    fetch(form.getAttribute('data-endpoint'), { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'failed'); return j; }); })
+      .then(function () {
+        box.classList.add('done');
+        var sh = $('#sent-h'); if (sh) sh.focus();
+      })
+      .catch(function (e) {
+        var known = e && /ZIP|email|name|Too many/i.test(e.message);
+        err.textContent = known ? e.message : 'We couldn\u2019t save your request just now. Please try again in a minute, or email info@aeroassist.us with \u201cAeroHome waitlist\u201d in the subject.';
+        err.hidden = false; err.focus();
+      })
+      .then(function () { submit.disabled = false; submit.removeAttribute('aria-busy'); submit.firstChild.textContent = label; });
   });
   ['#f-name', '#f-email', '#f-zip'].forEach(function (s) {
     $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); $(s).removeAttribute('aria-invalid'); });

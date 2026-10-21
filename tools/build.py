@@ -10,6 +10,8 @@ SRC = os.path.join(ROOT, 'src')
 LAUNCH = '--launch' in sys.argv
 SITE = os.environ.get('SITE_URL', 'https://aeroassistindustries.github.io/aerohome-preview/')
 V = time.strftime('%Y%m%d%H%M')
+EMAIL = os.environ.get('SITE_EMAIL', 'info@aeroassist.us')
+WAITLIST = os.environ.get('WAITLIST_URL', 'https://portal.aeroassist.us/api/aerohome/waitlist')
 OLD = os.environ.get('OLD_SITE', '/home/claude/aerohome-site')
 
 def read(p): return open(p, encoding='utf-8').read()
@@ -56,7 +58,7 @@ def render(html):
         return seal(name, counts[name])
     html = re.sub(r'<!--svg:([a-z-]+)-->', sub_svg, html)
     html = html.replace('{{Y}}', YES).replace('{{N}}', NO)
-    html = html.replace('{{SITE}}', SITE).replace('{{V}}', V)
+    html = html.replace('{{SITE}}', SITE).replace('{{V}}', V).replace('{{WAITLIST}}', WAITLIST)
     robots = '' if LAUNCH else '<meta name="robots" content="noindex, nofollow">'
     html = html.replace('<!--robots-->', robots)
     return curly(add_chips(html))
@@ -176,7 +178,12 @@ def main():
         for f in ['sitemap.xml', 'CNAME']:
             if os.path.exists(os.path.join(ROOT, f)): os.remove(os.path.join(ROOT, f))
     write(os.path.join(ROOT, 'site.webmanifest'), '{"name":"AeroHome","short_name":"AeroHome","start_url":"./","display":"browser","background_color":"#0b0f19","theme_color":"#0b0f19","icons":[{"src":"assets/img/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/img/icon-512.png","sizes":"512x512","type":"image/png"}]}\n')
-    print('built', 'LAUNCH' if LAUNCH else 'PREVIEW', SITE, V)
+    # contact address, switched in one place
+    if EMAIL != 'info@aeroassist.us':
+        for f in ['index.html', 'privacy.html', 'terms.html', '404.html', 'assets/js/site.js']:
+            fp = os.path.join(ROOT, f); s = read(fp)
+            write(fp, s.replace('info@aeroassist.us', EMAIL))
+    print('built', 'LAUNCH' if LAUNCH else 'PREVIEW', SITE, EMAIL, V)
 
 if __name__ == '__main__':
     main()

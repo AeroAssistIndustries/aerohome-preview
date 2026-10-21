@@ -772,3 +772,7 @@ body { font-feature-settings: "ss01" 0; }
   .cmp thead th span { font-size: 11px; }
   .cmp td svg { width: 16px; height: 16px; }
 }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-err { margin: 4px 0 12px; padding: 12px 14px; background: #fdecec; border-left: 3px solid #b42318; color: #7a1a12; font-size: 14.5px; line-height: 1.5; }
+.btn[aria-busy="true"] { opacity: .75; cursor: progress; }
+.form > form > p.form-err { font-family: var(--body); text-transform: none; letter-spacing: 0; font-size: 14.5px; }
