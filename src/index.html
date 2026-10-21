@@ -577,6 +577,51 @@
       </div>
     </details>
 
+    <div class="finder" id="finder">
+      <div class="finder-in">
+        <div class="finder-head">
+          <h3 class="d3">Find your setup</h3>
+          <p>Three quick questions. We'll suggest a kit and plan, and fill in the cost below.</p>
+        </div>
+        <fieldset class="fq">
+          <legend><span class="fq-n">1</span>What do you want covered?</legend>
+          <div class="opts">
+            <label><input type="radio" name="q-cover" value="out"><span><b>Outside</b><small>Yard, fence line and driveway</small></span></label>
+            <label><input type="radio" name="q-cover" value="in"><span><b>Inside</b><small>Doors, windows and rooms</small></span></label>
+            <label><input type="radio" name="q-cover" value="both"><span><b>Both</b><small>The whole property</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset class="fq">
+          <legend><span class="fq-n">2</span>Who should respond when something happens?</legend>
+          <div class="opts">
+            <label><input type="radio" name="q-resp" value="me"><span><b>Me</b><small>Alerts and live video on my phone</small></span></label>
+            <label><input type="radio" name="q-resp" value="auto"><span><b>Automatic deterrence</b><small>The system acts, I stay in the loop</small></span></label>
+            <label><input type="radio" name="q-resp" value="agents"><span><b>Trained agents</b><small>Professionals watching 24/7</small></span></label>
+          </div>
+        </fieldset>
+        <fieldset class="fq">
+          <legend><span class="fq-n">3</span>Is there anyone at home you check on?</legend>
+          <div class="opts">
+            <label><input type="radio" name="q-fam" value="yes"><span><b>Yes</b><small>Kids, aging parents or pets</small></span></label>
+            <label><input type="radio" name="q-fam" value="no"><span><b>No</b><small>Just the home itself</small></span></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="finder-out" aria-live="polite">
+        <div class="fo-empty"><span class="fo-ic"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><p>Answer the three questions to see the setup we'd suggest for your home.</p></div>
+        <div class="fo-res" hidden>
+          <p class="fo-k">Suggested setup</p>
+          <p class="fo-name"><span data-r="kit"></span> <span class="fo-pl"><span class="fo-plus">+</span> <span data-r="plan"></span></span></p>
+          <p class="fo-price"><b data-r="hw"></b> once, then <b data-r="mo"></b> a month</p>
+          <ul class="fo-why" data-r="why"></ul>
+          <div class="fo-btns">
+            <a class="btn btn-brass btn-sm" href="#waitlist" data-act="join">Join with this setup</a>
+            <a class="btn btn-ghost btn-sm" href="#build" data-act="cost">See the first-year cost</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="calc" id="build">
       <div class="calc-in">
         <h3 class="d3">Build your setup</h3>
@@ -658,6 +703,11 @@
         <div class="metro"><b>Phoenix</b><span>Arizona</span><br><em>Enrolling</em></div>
         <div class="metro"><b>Dallas–Fort Worth</b><span>Texas</span><br><em>Enrolling</em></div>
       </div>
+      <form class="zipcheck" id="zipcheck" novalidate>
+        <label for="zc-in">Check your ZIP code</label>
+        <div class="zc-row"><input id="zc-in" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="85004"><button class="btn btn-ghost btn-sm" type="submit">Check</button></div>
+        <p class="zc-out" id="zc-out" aria-live="polite"></p>
+      </form>
       <p class="note">Somewhere else? Choose “Elsewhere, notify me” and we'll tell you when AeroHome reaches your area.</p>
     </div>
     <div class="form" id="wl-form">
@@ -683,6 +733,8 @@
         <span class="ok"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
         <h3 class="d3" id="sent-h" tabindex="-1">You're on the list.</h3>
         <p>Thanks for joining the AeroHome pilot waitlist. We'll email you when installation opens in your area, along with your founder pricing.</p>
+        <button class="btn btn-ink btn-sm share-btn" type="button" id="share">Share with a neighbor</button>
+        <p class="share-note" id="share-note" aria-live="polite"></p>
       </div>
     </div>
   </div>
@@ -732,6 +784,7 @@
   </div>
 </footer>
 
+<div class="mbar" id="mbar" aria-hidden="true"><span><b>2026 pilot</b> Phoenix and DFW</span><a class="btn btn-brass btn-sm" href="#waitlist" tabindex="-1">Join the waitlist</a></div>
 <button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
 <script src="assets/js/site.js?v={{V}}" defer></script>

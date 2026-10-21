@@ -212,6 +212,110 @@
     $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); $(s).removeAttribute('aria-invalid'); });
   });
 
+  /* ---------- setup finder ---------- */
+  var KITS = { out: ['Sentinel Kit', 1499], 'in': ['Guardian Kit', 999], both: ['AeroHome Complete', 2299] };
+  var PLANS = { me: ['Essential', 49], auto: ['Plus', 89], agents: ['Total', 149] };
+  var finder = $('#finder'), rec = null;
+  function finderUpdate() {
+    var c = ($('input[name=q-cover]:checked') || {}).value, r = ($('input[name=q-resp]:checked') || {}).value, f = ($('input[name=q-fam]:checked') || {}).value;
+    if (!c || !r || !f) return;
+    var kit = KITS[c], planKey = r, why = [];
+    if (c === 'out') why.push('Sentinel patrols the property line and meets intruders at the fence.');
+    if (c === 'in') why.push('Guardian checks every door and window and patrols the rooms inside.');
+    if (c === 'both') why.push('Sentinel covers the property line and Guardian covers the inside, for less than buying both kits.');
+    if (r === 'me') why.push('Essential gives you verified alerts and live control, and you decide what happens next.');
+    if (r === 'auto') why.push('Plus runs spotlight and voice deterrence automatically, with you kept in the loop.');
+    if (r === 'agents') why.push('Total adds 24/7 professional monitoring, which most insurers require for a monitored-system discount.');
+    if (f === 'yes' && r === 'me') { planKey = 'auto'; why.push('We moved you up to Plus for arrival alerts, pet check-ins and Elder Watch.'); }
+    else if (f === 'yes') why.push('Your plan includes arrival alerts, pet check-ins and Elder Watch.');
+    var plan = PLANS[planKey];
+    rec = { kit: kit[0], hw: kit[1], plan: plan[0], mo: plan[1] };
+    $('[data-r=kit]', finder).textContent = rec.kit;
+    $('[data-r=plan]', finder).textContent = rec.plan;
+    $('[data-r=hw]', finder).textContent = '$' + rec.hw.toLocaleString('en-US');
+    $('[data-r=mo]', finder).textContent = '$' + rec.mo;
+    var ul = $('[data-r=why]', finder); ul.textContent = '';
+    why.forEach(function (w) { var li = document.createElement('li'); li.textContent = w; ul.appendChild(li); });
+    var first = $('.fo-res', finder).hidden;
+    $('.fo-empty', finder).hidden = true; $('.fo-res', finder).hidden = false;
+    if (first && window.innerWidth <= 980) {
+      var res = $('.finder-out', finder), r0 = res.getBoundingClientRect();
+      if (r0.top > window.innerHeight - 120) res.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+  }
+  if (finder) {
+    $$('input[type=radio]', finder).forEach(function (i) { i.addEventListener('change', finderUpdate); });
+    $('[data-act=cost]', finder).addEventListener('click', function () {
+      if (!rec) return;
+      var hw = $('#build input[name=hw][value="' + rec.hw + '"]'), pl = $('#build input[name=pl][value="' + rec.mo + '"]');
+      if (hw) hw.checked = true; if (pl) pl.checked = true; calc();
+    });
+    $('[data-act=join]', finder).addEventListener('click', function () {
+      if (!rec) return;
+      $('#f-hw').value = rec.kit; $('#f-plan').value = rec.plan;
+    });
+  }
+
+  /* ---------- ZIP check for the pilot areas ---------- */
+  function areaFor(zip) {
+    var z = +zip, p3 = Math.floor(z / 100);
+    if (p3 === 850 || p3 === 852 || p3 === 853 || (z >= 85138 && z <= 85143)) return 'Phoenix, AZ';
+    if ((p3 >= 750 && p3 <= 753) || (p3 >= 760 && p3 <= 762)) return 'Dallas–Fort Worth, TX';
+    return null;
+  }
+  var zc = $('#zipcheck');
+  if (zc) zc.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = $('#zc-in').value.trim(), out = $('#zc-out');
+    out.className = 'zc-out';
+    if (!/^\d{5}$/.test(v)) { out.textContent = 'Enter a 5-digit ZIP code.'; out.classList.add('bad'); return; }
+    var area = areaFor(v);
+    $('#f-zip').value = v;
+    if (area) {
+      $('#f-metro').value = area;
+      out.textContent = v + ' is in our ' + (area.indexOf('Phoenix') === 0 ? 'Phoenix' : 'Dallas–Fort Worth') + ' pilot area. We’ve filled it in on the form.';
+      out.classList.add('good');
+    } else {
+      $('#f-metro').value = 'Elsewhere, notify me';
+      out.textContent = v + ' isn’t in the 2026 pilot area yet. Join the list and we’ll tell you when AeroHome reaches you.';
+    }
+  });
+
+  /* ---------- share after sign-up ---------- */
+  var shareBtn = $('#share');
+  if (shareBtn) shareBtn.addEventListener('click', function () {
+    var url = location.origin + location.pathname, note = $('#share-note');
+    var data = { title: 'AeroHome', text: 'AeroHome is opening a 2026 pilot for drone and robot home security in Phoenix and Dallas–Fort Worth.', url: url };
+    if (navigator.share) { navigator.share(data).catch(function () {}); return; }
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { note.textContent = 'Link copied. Paste it in a text or email.'; }, function () { note.textContent = url; });
+  });
+
+  /* ---------- active section in the menu ---------- */
+  var navLinks = $$('.nav a[href^="#"]');
+  if ('IntersectionObserver' in window && navLinks.length) {
+    var map = {}; navLinks.forEach(function (a) { var t = document.getElementById(a.getAttribute('href').slice(1)); if (t) map[t.id] = a; });
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (en) {
+        var a = map[en.target.id]; if (!a) return;
+        if (en.isIntersecting) { navLinks.forEach(function (x) { x.removeAttribute('aria-current'); }); a.setAttribute('aria-current', 'true'); }
+        else if (a.getAttribute('aria-current')) a.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- phone bar: shows between the hero and the waitlist ---------- */
+  var mbar = $('#mbar');
+  if (mbar && 'IntersectionObserver' in window) {
+    var seen = {};
+    var mo = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { seen[en.target.id || en.target.tagName] = en.isIntersecting; });
+      var show = !seen.top && !seen.waitlist && !seen.FOOTER && !document.body.classList.contains('menu-open');
+      mbar.classList.toggle('show', show);
+    }, { threshold: 0 });
+    ['#top', '#waitlist', 'footer'].forEach(function (s) { var el = $(s); if (el) mo.observe(el); });
+  }
+
   /* load the 3D scenes once the page itself has finished loading */
   function loadScene() {
     var sc = document.createElement('script');

@@ -50,6 +50,15 @@ def curly(html):
         parts[i] = re.sub(r"(?<=[A-Za-z0-9])'(?=[A-Za-z])", '\u2019', parts[i])
     return ''.join(parts)
 
+def faq_ld(html):
+    import json, html as H
+    qas = re.findall(r'<details class="qa"><summary>(.*?)<i>.*?</summary><p>(.*?)</p></details>', html, flags=re.S)
+    clean = lambda t: H.unescape(re.sub(r'<[^>]+>', '', t)).strip()
+    data = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": clean(q), "acceptedAnswer": {"@type": "Answer", "text": clean(a)}} for q, a in qas]}
+    tag = '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>\n'
+    return html.replace('</head>', tag + '</head>', 1) if qas else html
+
 def render(html):
     counts = {}
     def sub_svg(m):
@@ -61,7 +70,7 @@ def render(html):
     html = html.replace('{{SITE}}', SITE).replace('{{V}}', V).replace('{{WAITLIST}}', WAITLIST)
     robots = '' if LAUNCH else '<meta name="robots" content="noindex, nofollow">'
     html = html.replace('<!--robots-->', robots)
-    return curly(add_chips(html))
+    return faq_ld(curly(add_chips(html)))
 
 def chrome(index_html):
     """Header and footer for the inner pages, with in-page links pointed at the home page."""
@@ -155,7 +164,7 @@ def main():
         subprocess.run([os.path.join(ROOT, 'node_modules', '.bin', 'esbuild'), os.path.join(SRC, 'main.js'), '--bundle', '--minify',
                         '--format=iife', '--target=es2019', '--outfile=' + os.path.join(ROOT, 'assets', 'js', 'scene.js'), '--log-level=warning'], check=True, env=env)
     esb = os.environ.get('ESBUILD') or os.path.join(ROOT, 'node_modules', '.bin', 'esbuild')
-    subprocess.run([esb, os.path.join(SRC, 'site.css'), '--minify',
+    subprocess.run([esb, os.path.join(SRC, 'site.css'), '--minify', '--target=safari15,ios15,chrome100,firefox100,edge100',
                     '--outfile=' + os.path.join(ROOT, 'assets', 'css', 'site.css'), '--log-level=warning'], check=True)
     subprocess.run([esb, os.path.join(SRC, 'site.js'), '--minify', '--target=es2017', '--outfile=' + os.path.join(ROOT, 'assets', 'js', 'site.js'), '--log-level=warning'], check=True)
     write(os.path.join(ROOT, 'assets', 'js', 'site-lite.js'), SITE_LITE)
