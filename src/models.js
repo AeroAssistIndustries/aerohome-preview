@@ -156,7 +156,7 @@ export function makeHub() {
   ].map(([x, y]) => new THREE.Vector2(x, y));
   add(g, new THREE.Mesh(new THREE.LatheGeometry(pts, 72), mat.graphite()));
   // fabric acoustic band
-  const fab = add(g, new THREE.Mesh(new THREE.CylinderGeometry(0.367, 0.375, 0.62, 72, 1, true), mat.fabric()), 0, 0.55, 0);
+  const fab = add(g, new THREE.Mesh(new THREE.CylinderGeometry(0.374, 0.383, 0.62, 72, 1, true), mat.fabric()), 0, 0.55, 0);
   fab.castShadow = false; fab.receiveShadow = false;
   // brass base band
   add(g, new THREE.Mesh(new THREE.CylinderGeometry(0.385, 0.39, 0.035, 72, 1, true), mat.brass()), 0, 0.16, 0);

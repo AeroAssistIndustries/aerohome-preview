@@ -41,6 +41,13 @@ def add_chips(html):
         return m.group(1) + inner + m.group(5)
     return re.sub(r'(<(?:a|button) class="(btn [^"]*)"([^>]*)>)(.*?)(</(?:a|button)>)', a, html, flags=re.S)
 
+def curly(html):
+    # typographic apostrophes in visible text only (not in tags, scripts or styles)
+    parts = re.split(r'(<script\b.*?</script>|<style\b.*?</style>|<[^>]+>)', html, flags=re.S)
+    for i in range(0, len(parts), 2):
+        parts[i] = re.sub(r"(?<=[A-Za-z0-9])'(?=[A-Za-z])", '\u2019', parts[i])
+    return ''.join(parts)
+
 def render(html):
     counts = {}
     def sub_svg(m):
@@ -52,7 +59,7 @@ def render(html):
     html = html.replace('{{SITE}}', SITE).replace('{{V}}', V)
     robots = '' if LAUNCH else '<meta name="robots" content="noindex, nofollow">'
     html = html.replace('<!--robots-->', robots)
-    return add_chips(html)
+    return curly(add_chips(html))
 
 def chrome(index_html):
     """Header and footer for the inner pages, with in-page links pointed at the home page."""

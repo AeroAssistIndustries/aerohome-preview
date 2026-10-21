@@ -23,7 +23,8 @@
     document.body.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
     menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    document.documentElement.style.overflow = open ? 'hidden' : '';
+    ['main', 'footer', '.ubar'].forEach(function (s) { var el = $(s); if (el) { if (open) el.setAttribute('inert', ''); else el.removeAttribute('inert'); } });
+    if (open) setTimeout(function () { var f = $('#drawer a'); if (f) f.focus({ preventScroll: true }); }, 80);
   }
   menuBtn.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
   $$('#drawer a').forEach(function (a) {
@@ -80,7 +81,7 @@
       el.style.opacity = (n >= from && n <= until) ? 1 : 0;
     });
     drone.style.transform = n >= 2 ? 'translate(398px, -6px)' : 'translate(0px, 0px)';
-    guard.style.transform = n >= 2 ? 'translate(150px, 28px)' : 'translate(0px, 0px)';
+    guard.style.transform = n >= 2 ? 'translate(128px, 22px)' : 'translate(0px, 0px)';
     intr.style.transform = n >= 5 ? 'translate(30px, -42px)' : 'translate(0px, 0px)';
     intr.style.opacity = n >= 5 ? 0.3 : 1;
     clockEl.textContent = STEP[n].c;
@@ -101,19 +102,7 @@
     (function next() {
       if (n >= 6) { stop(); playBtn.textContent = 'Replay the event'; return; }
       timer = setTimeout(function () { n++; setStep(n); next(); }, n === 0 ? 700 : 2300);
-    
-  /* load the 3D scenes once the page itself has finished loading */
-  function loadScene() {
-    var sc = document.createElement('script');
-    sc.src = document.documentElement.getAttribute('data-scene');
-    sc.async = true;
-    document.body.appendChild(sc);
-  }
-  if (document.documentElement.getAttribute('data-scene')) {
-    if (document.readyState === 'complete') setTimeout(loadScene, 300);
-    else window.addEventListener('load', function () { setTimeout(loadScene, 300); });
-  }
-})();
+    })();
   }
   playBtn.addEventListener('click', play);
   stepBtns.forEach(function (b) { b.addEventListener('click', function () { stop(); setStep(+b.getAttribute('data-step')); }); });
@@ -151,6 +140,8 @@
 
   /* calculator */
   var fmt = function (n) { return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  var whole = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+  var insNote = $('#ins-note');
   var prem = $('#prem'), disc = $('#disc'), discO = $('#disc-o'), ins = $('#ins');
   function out(k, v) { $('[data-o="' + k + '"]').textContent = v; }
   function calc() {
@@ -159,11 +150,14 @@
     var p = parseFloat(String(prem.value).replace(/[^0-9.]/g, '')) || 0;
     var d = +disc.value;
     discO.textContent = d + '%';
-    var save = ins.checked ? p * d / 100 : 0;
-    out('hw', fmt(hw));
-    out('py', fmt(pl * 12));
-    out('fy', fmt(hw + pl * 12));
-    out('sv', save ? '−' + fmt(save) : fmt(0));
+    var monitored = pl === 149;
+    disc.disabled = !ins.checked || !monitored;
+    insNote.hidden = monitored || !ins.checked;
+    var save = (ins.checked && monitored) ? p * d / 100 : 0;
+    out('hw', whole(hw));
+    out('py', whole(pl * 12));
+    out('fy', whole(hw + pl * 12));
+    out('sv', save ? '−' + whole(save) : '$0');
     out('pm', fmt(Math.max(0, pl - save / 12)));
     out('fk', fmt(hw / 36) + '/mo');
     out('fp', fmt(hw / 36 + pl) + '/mo');
@@ -172,6 +166,7 @@
   prem.addEventListener('blur', function () {
     var p = parseFloat(String(prem.value).replace(/[^0-9.]/g, ''));
     prem.value = isNaN(p) ? '' : Math.round(p).toLocaleString('en-US');
+    calc();
   });
   calc();
 
@@ -186,11 +181,15 @@
     e.preventDefault();
     var ok = true;
     var name = $('#f-name'), email = $('#f-email');
+    var zip = $('#f-zip');
     var nOk = name.value.trim().length > 1;
     var eOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
-    $('[data-f=name]').classList.toggle('bad', !nOk);
-    $('[data-f=email]').classList.toggle('bad', !eOk);
-    if (!nOk) { name.focus(); ok = false; } else if (!eOk) { email.focus(); ok = false; }
+    var zOk = !zip.value.trim() || /^\d{5}$/.test(zip.value.trim());
+    [['name', nOk, name], ['email', eOk, email], ['zip', zOk, zip]].forEach(function (x) {
+      $('[data-f=' + x[0] + ']').classList.toggle('bad', !x[1]);
+      if (x[1]) x[2].removeAttribute('aria-invalid'); else x[2].setAttribute('aria-invalid', 'true');
+    });
+    if (!nOk) { name.focus(); ok = false; } else if (!eOk) { email.focus(); ok = false; } else if (!zOk) { zip.focus(); ok = false; }
     if (!ok) return;
     var f = new FormData(form);
     var body = [
@@ -203,9 +202,10 @@
     ].join('\n');
     window.location.href = 'mailto:info@aeroassist.us?subject=' + encodeURIComponent('AeroHome waitlist') + '&body=' + encodeURIComponent(body);
     box.classList.add('done');
+    var sh = $('#sent-h'); if (sh) sh.focus();
   });
-  ['#f-name', '#f-email'].forEach(function (s) {
-    $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); });
+  ['#f-name', '#f-email', '#f-zip'].forEach(function (s) {
+    $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); $(s).removeAttribute('aria-invalid'); });
   });
 
   /* load the 3D scenes once the page itself has finished loading */

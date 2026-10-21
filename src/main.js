@@ -65,6 +65,8 @@ function startViewer() {
 }
 
 function start() {
+  if (window.__ahScene) return;
+  window.__ahScene = true;
   if (!gpuOK()) { document.documentElement.classList.add('no-webgl'); return; }
   idle(startHero);
   startViewer();

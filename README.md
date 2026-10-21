@@ -5,7 +5,7 @@ Preview: **https://aeroassistindustries.github.io/aerohome-preview/** (GitHub Pa
 | Path | What it is |
 |---|---|
 | `index.html`, `privacy.html`, `terms.html`, `404.html` | Built pages, served as-is |
-| `assets/` | Styles, fonts (Archivo, Public Sans), images, scripts, and the 3D scene bundle |
+| `assets/` | Styles, fonts (Oxanium, IBM Plex Sans, IBM Plex Mono), images, scripts, and the 3D scene bundle |
 | `src/` | Editable sources: page markup, styles, page script, and the 3D hero and product models |
 | `tools/build.py` | Rebuilds the pages and the 3D bundle from `src/` |
 | `tools/make_art.py` | Generates the flag and seal artwork |
@@ -13,6 +13,7 @@ Preview: **https://aeroassistindustries.github.io/aerohome-preview/** (GitHub Pa
 ## Rebuild
 
 ```
+npm install                       # once, for the 3D bundle and minifier
 python3 tools/build.py            # preview build (search engines told not to index)
 python3 tools/build.py --launch   # launch build (indexable)
 ```
