@@ -283,7 +283,7 @@
           <g class="move" id="tac-guard" style="transform: translate(0px,0px)"><g transform="translate(272 172)"><rect x="-8" y="-6" width="16" height="12" rx="5" fill="#e6cd92"/><circle r="11" fill="none" stroke="#e6cd92" stroke-opacity=".35"/></g></g>
           <!-- step 5 / 6 badges -->
           <g data-s="5"><g transform="translate(76 372)"><rect width="196" height="32" rx="16" fill="#1d1426" stroke="#e5484d"/><circle cx="18" cy="16" r="5" fill="#e5484d"/><text x="32" y="21" fill="#ffc9cb" font-size="12.5" font-weight="600" font-family="IBM Plex Sans, sans-serif">Live agent on the feed</text></g>
-            <g transform="translate(282 372)"><rect width="120" height="32" rx="16" fill="#1d1426" stroke="#e5484d"/><text x="60" y="21" text-anchor="middle" fill="#ffc9cb" font-size="12.5" font-weight="600" font-family="IBM Plex Sans, sans-serif">911 one tap</text></g></g>
+            <g transform="translate(282 372)"><rect width="120" height="32" rx="16" fill="#1d1426" stroke="#e5484d"/><text x="60" y="21" text-anchor="middle" fill="#ffc9cb" font-size="12.5" font-weight="600" font-family="IBM Plex Sans, sans-serif">One-tap 911</text></g></g>
           <g data-s="6"><g transform="translate(412 372)"><rect width="150" height="32" rx="16" fill="#1d2433" stroke="#c8a15a"/><text x="75" y="21" text-anchor="middle" fill="#e6cd92" font-size="12.5" font-weight="600" font-family="IBM Plex Sans, sans-serif">Evidence sealed</text></g></g>
         </svg>
         <div class="tac-bar"><span data-tac-status>Patrol. Sentinel is docked and Guardian is on its rounds.</span><span class="clock" data-tac-clock>2:12:58 a.m.</span></div>
@@ -470,7 +470,7 @@
         <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Kids are home. Front door locked.</b></div></div></article>
       <article class="moment"><time>5:45 p.m.</time><h3>Pet check-ins</h3><p>Find the dog, see what the cat knocked over, and say hi out loud from anywhere.</p>
         <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Dog found in the living room. Say hi?</b></div></div></article>
-      <article class="moment"><time>7:30 p.m.</time><h3>Elder Watch</h3><p>Gentle check-ins on aging parents' routines, with a two-way video visit from Guardian when something seems off.</p>
+      <article class="moment"><time>7:30 p.m.</time><h3>Elder Watch</h3><p>Gentle check-ins on aging parents’ routines, with a two-way video visit from Guardian when something seems off.</p>
         <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Mom's evening routine is on track.</b></div></div></article>
       <article class="moment"><time>10:30 p.m.</time><h3>Goodnight sweep</h3><p>Guardian checks every door and window before bed and reports back with a simple all-secure checklist.</p>
         <div class="toast"><img src="assets/img/mark.png" alt="" width="30" height="27"><div><small><span>AeroHome</span><span>now</span></small><b>Every door and window is secure.</b></div></div></article>
@@ -581,10 +581,10 @@
       <div class="finder-in">
         <div class="finder-head">
           <h3 class="d3">Find your setup</h3>
-          <p>Three quick questions. We'll suggest a kit and plan, and fill in the cost below.</p>
+          <p>Three quick questions, and we'll suggest a kit and plan for your home.</p>
         </div>
         <fieldset class="fq">
-          <legend><span class="fq-n">1</span>What do you want covered?</legend>
+          <legend><span class="fq-n" aria-hidden="true">1</span>What do you want covered?</legend>
           <div class="opts">
             <label><input type="radio" name="q-cover" value="out"><span><b>Outside</b><small>Yard, fence line and driveway</small></span></label>
             <label><input type="radio" name="q-cover" value="in"><span><b>Inside</b><small>Doors, windows and rooms</small></span></label>
@@ -592,7 +592,7 @@
           </div>
         </fieldset>
         <fieldset class="fq">
-          <legend><span class="fq-n">2</span>Who should respond when something happens?</legend>
+          <legend><span class="fq-n" aria-hidden="true">2</span>Who should respond when something happens?</legend>
           <div class="opts">
             <label><input type="radio" name="q-resp" value="me"><span><b>Me</b><small>Alerts and live video on my phone</small></span></label>
             <label><input type="radio" name="q-resp" value="auto"><span><b>Automatic deterrence</b><small>The system acts, I stay in the loop</small></span></label>
@@ -600,7 +600,7 @@
           </div>
         </fieldset>
         <fieldset class="fq">
-          <legend><span class="fq-n">3</span>Is there anyone at home you check on?</legend>
+          <legend><span class="fq-n" aria-hidden="true">3</span>Is there anyone at home you check on?</legend>
           <div class="opts">
             <label><input type="radio" name="q-fam" value="yes"><span><b>Yes</b><small>Kids, aging parents or pets</small></span></label>
             <label><input type="radio" name="q-fam" value="no"><span><b>No</b><small>Just the home itself</small></span></label>
@@ -652,9 +652,9 @@
       <div class="calc-out" aria-live="polite">
         <dl>
           <dt>Hardware, one time</dt><dd data-o="hw">$2,299</dd>
-          <dt>Plan, per year</dt><dd data-o="py">$1,788.00</dd>
-          <div class="total" style="display:contents"><dt>First-year cost</dt><dd data-o="fy">$4,287.00</dd></div>
-          <div class="save" style="display:contents"><dt>Insurance savings, per year</dt><dd data-o="sv">−$180.00</dd></div>
+          <dt>Plan, per year</dt><dd data-o="py">$1,788</dd>
+          <div class="total" style="display:contents"><dt>First-year cost</dt><dd data-o="fy">$4,087</dd></div>
+          <div class="save" style="display:contents"><dt>Insurance savings, per year</dt><dd data-o="sv">−$180</dd></div>
           <dt>Plan after savings, per month</dt><dd data-o="pm">$134.00</dd>
         </dl>
         <p class="fin">36-month financing for any kit will be available at launch.</p>
@@ -682,7 +682,7 @@
       <details class="qa"><summary>What happens if someone cuts the power or the internet?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>The Hub has cellular and battery backup and records locally, so cutting the power or the internet line keeps the system running on backup.</p></details>
       <details class="qa"><summary>Will the robot go into bedrooms?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Not by default. Bedrooms are no-go zones enforced on the device, and Guardian's camera has a physical shutter you can see.</p></details>
       <details class="qa"><summary>Will it lower my home-insurance premium?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>It may. Many insurers discount premiums 5 to 15% for verified, monitored systems, and the Total plan includes 24/7 professional monitoring and an insurance documentation pack. Check with your carrier for your exact discount.</p></details>
-      <details class="qa"><summary>What do waitlist members get?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Priority installation, founder pricing and 60 days of the Total plan free. Joining the waitlist is free and doesn't commit you to buy.</p></details>
+      <details class="qa"><summary>What do waitlist members get?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Priority installation, founder pricing and 60 days of the Total plan, free. Joining the waitlist is free and doesn't commit you to buy.</p></details>
     </div>
   </div>
 </section>
@@ -697,7 +697,7 @@
       <ul class="perks">
         <li><svg aria-hidden="true"><use href="#i-star"/></svg>Priority installation</li>
         <li><svg aria-hidden="true"><use href="#i-star"/></svg>Founder pricing</li>
-        <li><svg aria-hidden="true"><use href="#i-star"/></svg>60 days of Total monitoring, free</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>60 days of the Total plan, free</li>
       </ul>
       <div class="metros">
         <div class="metro"><b>Phoenix</b><span>Arizona</span><br><em>Enrolling</em></div>

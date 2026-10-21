@@ -89,6 +89,8 @@ def legal_page(index_html, title, desc, src_file, out_name):
     art = re.search(r'<article[^>]*>(.*?)</article>', t, re.S).group(1)
     art = re.sub(r'<div class="legal-note">.*?</div>', '', art, flags=re.S)
     art = art.replace('<h3>', '<h2>').replace('</h3>', '</h2>')
+    art = art.replace('The interactive illustration and the &ldquo;Build your setup&rdquo; calculator run entirely in your browser',
+                      'The interactive illustrations, the &ldquo;Find your setup&rdquo; questions, the ZIP check and the &ldquo;Build your setup&rdquo; calculator run entirely in your browser')
     updated = re.search(r'Last updated[^<]*?(\d{1,2} \w{3} \d{4})', t)
     updated = updated.group(1) if updated else '1 Oct 2026'
     top, foot, sprite = chrome(index_html)
@@ -133,7 +135,7 @@ def not_found(index_html):
 <section class="nf">
   <div class="wrap">
     <p class="kicker" style="justify-content:center">Error 404</p>
-    <h1 class="d1">This page isn't on the property.</h1>
+    <h1 class="d1">This page isn’t on the property.</h1>
     <p class="lede" style="color:#c3cad8">Sentinel swept the whole perimeter and came back empty. The link may be old or mistyped.</p>
     <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap"><a class="btn btn-brass" href="index.html">Back to AeroHome</a><a class="btn btn-ghost" href="index.html#waitlist">Join the waitlist</a></div>
   </div>

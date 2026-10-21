@@ -847,3 +847,11 @@ body { font-feature-settings: "ss01" 0; }
   .menu-open .mbar { transform: translateY(110%); }
 }
 .fo-pl { white-space: nowrap; }
+
+/* review round 3 */
+@media (max-width: 1199px) { .totop { display: none; } }
+.fo-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fo-btns .btn { width: 100%; padding: 0 12px; }
+@media (max-width: 600px) { .fo-btns { grid-template-columns: 1fr; } }
+.fq legend { align-items: flex-start; }
+.fq-n { flex: none; margin-top: 1px; }

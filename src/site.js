@@ -39,7 +39,7 @@
       });
     });
   });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); menuBtn.focus(); } });
   window.addEventListener('resize', function () { if (window.innerWidth > 1080) setMenu(false); });
 
   /* why: fixed cameras vs AeroHome */
@@ -204,10 +204,15 @@
       .catch(function (e) {
         var known = e && /ZIP|email|name|Too many/i.test(e.message);
         err.textContent = known ? e.message : 'We couldn\u2019t save your request just now. Please try again in a minute, or email info@aeroassist.us with \u201cAeroHome waitlist\u201d in the subject.';
+        if (e && /ZIP/i.test(e.message)) { $('[data-f=zip]').classList.add('bad'); fz.setAttribute('aria-invalid', 'true'); }
         err.hidden = false; err.focus();
       })
       .then(function () { submit.disabled = false; submit.removeAttribute('aria-busy'); submit.firstChild.textContent = label; });
   });
+  var fz = $('#f-zip');
+  fz.addEventListener('input', function () { var d = fz.value.replace(/\D/g, '').slice(0, 5); if (d !== fz.value) fz.value = d; });
+  fz.addEventListener('change', function () { if (/^\d{5}$/.test(fz.value)) $('#f-metro').value = areaFor(fz.value) || 'Elsewhere, notify me'; });
+  $('#zc-in').addEventListener('input', function () { var el = $('#zc-in'), d = el.value.replace(/\D/g, '').slice(0, 5); if (d !== el.value) el.value = d; });
   ['#f-name', '#f-email', '#f-zip'].forEach(function (s) {
     $(s).addEventListener('input', function () { $(s).closest('.f').classList.remove('bad'); $(s).removeAttribute('aria-invalid'); });
   });
@@ -219,15 +224,19 @@
   function finderUpdate() {
     var c = ($('input[name=q-cover]:checked') || {}).value, r = ($('input[name=q-resp]:checked') || {}).value, f = ($('input[name=q-fam]:checked') || {}).value;
     if (!c || !r || !f) return;
-    var kit = KITS[c], planKey = r, why = [];
-    if (c === 'out') why.push('Sentinel patrols the property line and meets intruders at the fence.');
+    var kitKey = c, planKey = r, why = [];
+    if (c === 'out' && f === 'yes') kitKey = 'both';
+    var kit = KITS[kitKey];
+    if (c === 'out' && f === 'no') why.push('Sentinel patrols the property line and meets intruders at the fence.');
     if (c === 'in') why.push('Guardian checks every door and window and patrols the rooms inside.');
     if (c === 'both') why.push('Sentinel covers the property line and Guardian covers the inside, for less than buying both kits.');
-    if (r === 'me') why.push('Essential gives you verified alerts and live control, and you decide what happens next.');
-    if (r === 'auto') why.push('Plus runs spotlight and voice deterrence automatically, with you kept in the loop.');
+    if (c === 'out' && f === 'yes') why.push('We added Guardian, because pet check-ins and Elder Watch happen inside the home. Complete costs less than buying both kits.');
+    var deter = kitKey === 'in' ? 'siren, strobe and voice' : 'spotlight and voice';
+    if (r === 'me' && f === 'yes') { planKey = 'auto'; why.push('Plus keeps every response in your hands and adds arrival alerts, pet check-ins and Elder Watch.'); }
+    else if (r === 'me') why.push('Essential gives you verified alerts and live control, and you decide what happens next.');
+    if (r === 'auto') why.push('Plus runs ' + deter + ' deterrence automatically, with you kept in the loop.');
     if (r === 'agents') why.push('Total adds 24/7 professional monitoring, which most insurers require for a monitored-system discount.');
-    if (f === 'yes' && r === 'me') { planKey = 'auto'; why.push('We moved you up to Plus for arrival alerts, pet check-ins and Elder Watch.'); }
-    else if (f === 'yes') why.push('Your plan includes arrival alerts, pet check-ins and Elder Watch.');
+    if (f === 'yes' && r !== 'me') why.push('Your plan includes arrival alerts, pet check-ins and Elder Watch.');
     var plan = PLANS[planKey];
     rec = { kit: kit[0], hw: kit[1], plan: plan[0], mo: plan[1] };
     $('[data-r=kit]', finder).textContent = rec.kit;
@@ -240,7 +249,7 @@
     $('.fo-empty', finder).hidden = true; $('.fo-res', finder).hidden = false;
     if (first && window.innerWidth <= 980) {
       var res = $('.finder-out', finder), r0 = res.getBoundingClientRect();
-      if (r0.top > window.innerHeight - 120) res.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      if (r0.top > window.innerHeight * 0.5) res.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
     }
   }
   if (finder) {
@@ -253,31 +262,37 @@
     $('[data-act=join]', finder).addEventListener('click', function () {
       if (!rec) return;
       $('#f-hw').value = rec.kit; $('#f-plan').value = rec.plan;
+      setTimeout(function () { $('#f-name').focus({ preventScroll: true }); }, 450);
     });
   }
 
   /* ---------- ZIP check for the pilot areas ---------- */
   function areaFor(zip) {
     var z = +zip, p3 = Math.floor(z / 100);
-    if (p3 === 850 || p3 === 852 || p3 === 853 || (z >= 85138 && z <= 85143)) return 'Phoenix, AZ';
-    if ((p3 >= 750 && p3 <= 753) || (p3 >= 760 && p3 <= 762)) return 'Dallas–Fort Worth, TX';
+    // Phoenix metro: 850, 852 and most of 853, plus Apache Junction, Gold Canyon, Maricopa, San Tan Valley and Queen Creek.
+    // Far western and outlying 853 towns (Yuma, Parker, Ajo, Wickenburg and others) are outside the pilot.
+    var PHX_NO = [85320, 85321, 85324, 85325, 85328, 85332, 85333, 85334, 85336, 85337, 85341, 85342, 85344, 85346, 85347, 85348, 85349, 85350, 85352, 85356, 85357, 85358, 85359, 85360, 85362, 85364, 85365, 85366, 85367, 85369, 85371, 85390];
+    // Dallas–Fort Worth: 750–753 and 760–762, without outlying towns such as Sherman, Denison, Corsicana and Gainesville.
+    var DFW_NO = [75020, 75021, 75090, 75091, 75092, 75110, 75148, 76240, 76241];
+    if (p3 === 850 || p3 === 852 || (p3 === 853 && PHX_NO.indexOf(z) < 0) || (z >= 85118 && z <= 85120) || (z >= 85138 && z <= 85143)) return 'Phoenix, AZ';
+    if (((p3 >= 750 && p3 <= 753) || (p3 >= 760 && p3 <= 762)) && DFW_NO.indexOf(z) < 0) return 'Dallas–Fort Worth, TX';
     return null;
   }
   var zc = $('#zipcheck');
   if (zc) zc.addEventListener('submit', function (e) {
     e.preventDefault();
-    var v = $('#zc-in').value.trim(), out = $('#zc-out');
+    var v = $('#zc-in').value.replace(/\D/g, ''), out = $('#zc-out');
     out.className = 'zc-out';
     if (!/^\d{5}$/.test(v)) { out.textContent = 'Enter a 5-digit ZIP code.'; out.classList.add('bad'); return; }
     var area = areaFor(v);
     $('#f-zip').value = v;
     if (area) {
       $('#f-metro').value = area;
-      out.textContent = v + ' is in our ' + (area.indexOf('Phoenix') === 0 ? 'Phoenix' : 'Dallas–Fort Worth') + ' pilot area. We’ve filled it in on the form.';
+      out.textContent = v + ' is in our ' + (area.indexOf('Phoenix') === 0 ? 'Phoenix' : 'Dallas–Fort Worth') + ' pilot area. We’ve added your ZIP code and metro to the form.';
       out.classList.add('good');
     } else {
       $('#f-metro').value = 'Elsewhere, notify me';
-      out.textContent = v + ' isn’t in the 2026 pilot area yet. Join the list and we’ll tell you when AeroHome reaches you.';
+      out.textContent = v + ' isn’t in a 2026 pilot area yet. We’ve set the form to “Elsewhere, notify me,” and we’ll tell you when AeroHome reaches you.';
     }
   });
 
@@ -287,7 +302,7 @@
     var url = location.origin + location.pathname, note = $('#share-note');
     var data = { title: 'AeroHome', text: 'AeroHome is opening a 2026 pilot for drone and robot home security in Phoenix and Dallas–Fort Worth.', url: url };
     if (navigator.share) { navigator.share(data).catch(function () {}); return; }
-    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { note.textContent = 'Link copied. Paste it in a text or email.'; }, function () { note.textContent = url; });
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { note.textContent = 'Link copied. Paste it in a text or email.'; }, function () { note.textContent = 'Copy this link: ' + url; });
   });
 
   /* ---------- active section in the menu ---------- */
