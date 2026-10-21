@@ -29,6 +29,18 @@ def seal(name, n):
 YES = '<svg aria-label="Included"><use href="#i-check"/></svg>'
 NO = '<span class="no" aria-label="Not included">—</span>'
 
+CHIP = '<span class="chip" aria-hidden="true"><svg><use href="#i-arrow"/></svg></span>'
+TRI = '<span class="tri" aria-hidden="true"></span>'
+
+def add_chips(html):
+    def a(m):
+        cls, inner = m.group(2), m.group(4)
+        if 'btn-sm' in cls or 'chip' in inner or 'tri' in inner: return m.group(0)
+        if 'btn-brass' in cls or 'btn-ink' in cls: inner = inner + CHIP
+        elif 'btn-ghost' in cls or 'btn-line' in cls: inner = inner + TRI
+        return m.group(1) + inner + m.group(5)
+    return re.sub(r'(<(?:a|button) class="(btn [^"]*)"([^>]*)>)(.*?)(</(?:a|button)>)', a, html, flags=re.S)
+
 def render(html):
     counts = {}
     def sub_svg(m):
@@ -40,7 +52,7 @@ def render(html):
     html = html.replace('{{SITE}}', SITE).replace('{{V}}', V)
     robots = '' if LAUNCH else '<meta name="robots" content="noindex, nofollow">'
     html = html.replace('<!--robots-->', robots)
-    return html
+    return add_chips(html)
 
 def chrome(index_html):
     """Header and footer for the inner pages, with in-page links pointed at the home page."""
@@ -110,7 +122,7 @@ def not_found(index_html):
 </body>
 </html>
 '''
-    return head + body
+    return add_chips(head + body)
 
 SITE_LITE = r"""(function(){var h=document.getElementById('head'),t=document.querySelector('.totop'),m=document.querySelector('.menu-btn');
 function s(){var y=window.scrollY||0;h.classList.toggle('scrolled',y>8);t.classList.toggle('show',y>900);}

@@ -55,8 +55,8 @@ def seal(top, bottom, center_svg, aria):
          '<circle cx="60" cy="60" r="57" fill="none" stroke="url(#b)" stroke-width="2.5"/>',
          '<circle cx="60" cy="60" r="51" fill="none" stroke="url(#b)" stroke-width=".8"/>',
          '<circle cx="60" cy="60" r="32" fill="none" stroke="url(#b)" stroke-width="1.2"/>',
-         f'<text font-family="Archivo, Arial, sans-serif" font-size="9.2" font-weight="700" letter-spacing="1.6" fill="url(#b)"><textPath href="#t" startOffset="50%" text-anchor="middle">{top}</textPath></text>',
-         f'<text font-family="Archivo, Arial, sans-serif" font-size="8.4" font-weight="700" letter-spacing="1.6" fill="url(#b)"><textPath href="#u" startOffset="50%" text-anchor="middle" dominant-baseline="hanging">{bottom}</textPath></text>',
+         f'<text font-family="Oxanium, Arial, sans-serif" font-size="9.2" font-weight="700" letter-spacing="1.6" fill="url(#b)"><textPath href="#t" startOffset="50%" text-anchor="middle">{top}</textPath></text>',
+         f'<text font-family="Oxanium, Arial, sans-serif" font-size="8.4" font-weight="700" letter-spacing="1.6" fill="url(#b)"><textPath href="#u" startOffset="50%" text-anchor="middle" dominant-baseline="hanging">{bottom}</textPath></text>',
          star(17, 60, 2.6, '#C8A15A'), star(103, 60, 2.6, '#C8A15A'),
          center_svg, '</svg>']
     return ''.join(s)
@@ -65,10 +65,10 @@ files = {
     'flag-us.svg': us_flag(),
     'flag-az.svg': az_flag(),
     'seal-american.svg': seal('AMERICAN OWNED', 'AMERICAN COMPANY',
-        '<text x="60" y="66" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="17" font-weight="800" letter-spacing="1" fill="url(#b)">USA</text>' + ''.join(star(48 + i*12, 47, 2.4, '#C8A15A') for i in range(3)),
+        '<text x="60" y="66" text-anchor="middle" font-family="Oxanium, Arial, sans-serif" font-size="17" font-weight="800" letter-spacing="1" fill="url(#b)">USA</text>' + ''.join(star(48 + i*12, 47, 2.4, '#C8A15A') for i in range(3)),
         'American owned'),
     'seal-ndaa.svg': seal('NDAA §848', 'COMPLIANT',
-        '<path d="M60 38 L76 44 V58 C76 69 69 77 60 81 C51 77 44 69 44 58 V44 Z" fill="none" stroke="url(#b)" stroke-width="2"/><text x="60" y="60" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="8.5" font-weight="800" fill="url(#b)">NDAA</text><text x="60" y="70" text-anchor="middle" font-family="Archivo, Arial, sans-serif" font-size="7" font-weight="700" fill="url(#b)">§848</text>',
+        '<path d="M60 38 L76 44 V58 C76 69 69 77 60 81 C51 77 44 69 44 58 V44 Z" fill="none" stroke="url(#b)" stroke-width="2"/><text x="60" y="60" text-anchor="middle" font-family="Oxanium, Arial, sans-serif" font-size="8.5" font-weight="800" fill="url(#b)">NDAA</text><text x="60" y="70" text-anchor="middle" font-family="Oxanium, Arial, sans-serif" font-size="7" font-weight="700" fill="url(#b)">§848</text>',
         'NDAA Section 848 compliant'),
     'seal-arizona.svg': seal('HEADQUARTERED IN', 'ARIZONA · USA',
         star(60, 60, 15, '#C8A15A'),
