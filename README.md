@@ -1,6 +1,8 @@
 # AeroHome website
 
-Preview: **https://aeroassistindustries.github.io/aerohome-preview/** (GitHub Pages, published from `main`).
+Live: **https://aerohome.us/** (Cloudflare Pages, deployed from `main`; GitHub holds the code).
+
+Launch build command: `SITE_URL=https://aerohome.us/ SITE_EMAIL=info@aerohome.us python3 tools/build.py --launch`
 
 | Path | What it is |
 |---|---|

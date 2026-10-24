@@ -13,6 +13,8 @@ V = time.strftime('%Y%m%d%H%M')
 EMAIL = os.environ.get('SITE_EMAIL', 'info@aeroassist.us')
 WAITLIST = os.environ.get('WAITLIST_URL', 'https://portal.aeroassist.us/api/aerohome/waitlist')
 OLD = os.environ.get('OLD_SITE', '/home/claude/aerohome-site')
+LEGAL = os.environ.get('LEGAL_NAME', 'AeroHome LLC')
+LEGAL_SRC = os.path.join(ROOT, '.legal-src')
 
 def read(p): return open(p, encoding='utf-8').read()
 def write(p, s):
@@ -85,14 +87,20 @@ def chrome(index_html):
     return fix(top), fix(foot), sprite
 
 def legal_page(index_html, title, desc, src_file, out_name):
-    t = read(os.path.join(OLD, src_file))
-    art = re.search(r'<article[^>]*>(.*?)</article>', t, re.S).group(1)
+    old = os.path.join(OLD, src_file)
+    t = read(old if os.path.exists(old) else os.path.join(LEGAL_SRC, src_file))
+    doc = re.search(r'<section class="doc">.*?<p class="meta">[^<]*</p>(.*?)\n  </div>\n</section>', t, re.S)
+    art = doc.group(1) if doc else re.search(r'<article[^>]*>(.*?)</article>', t, re.S).group(1)
     art = re.sub(r'<div class="legal-note">.*?</div>', '', art, flags=re.S)
     art = art.replace('<h3>', '<h2>').replace('</h3>', '</h2>')
     art = art.replace('The interactive illustration and the &ldquo;Build your setup&rdquo; calculator run entirely in your browser',
                       'The interactive illustrations, the &ldquo;Find your setup&rdquo; questions, the ZIP check and the &ldquo;Build your setup&rdquo; calculator run entirely in your browser')
     updated = re.search(r'Last updated[^<]*?(\d{1,2} \w{3} \d{4})', t)
     updated = updated.group(1) if updated else '1 Oct 2026'
+    if LEGAL not in art:
+        art = art.replace('AeroHome (&ldquo;AeroHome&rdquo;', LEGAL + ' (&ldquo;AeroHome&rdquo;', 1)
+        art = art.replace('belong to AeroHome and', 'belong to ' + LEGAL + ' and')
+        updated = os.environ.get('LEGAL_UPDATED', updated)
     top, foot, sprite = chrome(index_html)
     head = index_html[:index_html.index('<body>')]
     head = re.sub(r'<title>.*?</title>', f'<title>{title} | AeroHome</title>', head)
@@ -170,6 +178,9 @@ def main():
                     '--outfile=' + os.path.join(ROOT, 'assets', 'css', 'site.css'), '--log-level=warning'], check=True)
     subprocess.run([esb, os.path.join(SRC, 'site.js'), '--minify', '--target=es2017', '--outfile=' + os.path.join(ROOT, 'assets', 'js', 'site.js'), '--log-level=warning'], check=True)
     write(os.path.join(ROOT, 'assets', 'js', 'site-lite.js'), SITE_LITE)
+    os.makedirs(LEGAL_SRC, exist_ok=True)
+    for f in ['privacy.html', 'terms.html']:
+        if os.path.exists(os.path.join(ROOT, f)): shutil.copy(os.path.join(ROOT, f), os.path.join(LEGAL_SRC, f))
     idx = render(read(os.path.join(SRC, 'index.html')))
     write(os.path.join(ROOT, 'index.html'), idx)
     write(os.path.join(ROOT, 'privacy.html'), legal_page(idx, 'Privacy Policy', 'What AeroHome collects through this website and the waitlist, how it is used, and the choices you have.', 'privacy.html', 'privacy.html'))
@@ -181,9 +192,8 @@ def main():
         today = time.strftime('%Y-%m-%d')
         urls = ''.join(f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>\n" for p in ['', 'privacy.html', 'terms.html'])
         write(os.path.join(ROOT, 'sitemap.xml'), f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
-        host = re.sub(r'^https?://', '', SITE).strip('/')
-        if not host.endswith('github.io') and '/' not in host:
-            write(os.path.join(ROOT, 'CNAME'), host + '\n')
+        # hosted on Cloudflare Pages with the custom domain set there, so no GitHub Pages CNAME file
+        if os.path.exists(os.path.join(ROOT, 'CNAME')): os.remove(os.path.join(ROOT, 'CNAME'))
     else:
         write(os.path.join(ROOT, 'robots.txt'), "User-agent: *\nDisallow: /\n")
         for f in ['sitemap.xml', 'CNAME']:
