@@ -14,6 +14,14 @@ EMAIL = os.environ.get('SITE_EMAIL', 'info@aeroassist.us')
 WAITLIST = os.environ.get('WAITLIST_URL', 'https://portal.aeroassist.us/api/aerohome/waitlist')
 OLD = os.environ.get('OLD_SITE', '/home/claude/aerohome-site')
 LEGAL = os.environ.get('LEGAL_NAME', 'AeroHome LLC')
+# Square checkout links for the $499 Founders deposit: one per plan, or SQUARE_LINK for all plans
+def square_links():
+    import json, html as H
+    links = {k: os.environ.get('SQUARE_' + k.upper(), '').strip() for k in ['Essential', 'Plus', 'Total']}
+    if os.environ.get('SQUARE_LINK', '').strip(): links['*'] = os.environ['SQUARE_LINK'].strip()
+    links = {k: v for k, v in links.items() if v.startswith('https://')}
+    return H.escape(json.dumps(links), quote=True)
+SQUARE = square_links()
 LEGAL_SRC = os.path.join(ROOT, '.legal-src')
 
 def read(p): return open(p, encoding='utf-8').read()
@@ -69,7 +77,7 @@ def render(html):
         return seal(name, counts[name])
     html = re.sub(r'<!--svg:([a-z-]+)-->', sub_svg, html)
     html = html.replace('{{Y}}', YES).replace('{{N}}', NO)
-    html = html.replace('{{SITE}}', SITE).replace('{{V}}', V).replace('{{WAITLIST}}', WAITLIST)
+    html = html.replace('{{SITE}}', SITE).replace('{{V}}', V).replace('{{WAITLIST}}', WAITLIST).replace('{{SQUARE}}', SQUARE)
     robots = '' if LAUNCH else '<meta name="robots" content="noindex, nofollow">'
     html = html.replace('<!--robots-->', robots)
     return faq_ld(curly(add_chips(html)))
@@ -211,7 +219,7 @@ def main():
         for f in ['index.html', 'privacy.html', 'terms.html', '404.html', 'assets/js/site.js']:
             fp = os.path.join(ROOT, f); s = read(fp)
             write(fp, s.replace('info@aeroassist.us', EMAIL))
-    print('built', 'LAUNCH' if LAUNCH else 'PREVIEW', SITE, EMAIL, V)
+    print('built', 'LAUNCH' if LAUNCH else 'PREVIEW', SITE, EMAIL, V, 'square:', SQUARE)
 
 if __name__ == '__main__':
     main()

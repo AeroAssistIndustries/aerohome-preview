@@ -61,7 +61,7 @@
     <span class="flags"><img src="assets/img/flag-us.svg" alt="" width="25" height="13"><img src="assets/img/flag-az.svg" alt="" width="20" height="13"></span>
     <span class="ub-long">American-owned, headquartered in Arizona</span><span class="ub-short" aria-hidden="true">American-owned, Arizona HQ</span>
     <span class="hide-md"><svg width="15" height="15" aria-hidden="true"><use href="#i-shield"/></svg>NDAA §848-compliant hardware</span>
-    <span class="end"><i class="dot"></i>2026 pilot now enrolling in Phoenix and Dallas–Fort Worth</span>
+    <span class="end"><i class="dot"></i>Founders reservations open in Phoenix and Dallas–Fort Worth</span>
   </div>
 </aside>
 
@@ -77,10 +77,11 @@
       <a href="#app">The app</a>
       <a href="#family">Family</a>
       <a href="#privacy">Privacy</a>
+      <a href="#founders">Founders</a>
       <a href="#plans">Plans</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="btn btn-brass btn-sm" href="#waitlist">Join the waitlist</a>
+    <a class="btn btn-brass btn-sm" href="#founders">Reserve for $499</a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer" aria-label="Open menu"><span></span></button>
   </div>
 </header>
@@ -90,9 +91,10 @@
   <a href="#app">The app</a>
   <a href="#family">Family</a>
   <a href="#privacy">Privacy</a>
+  <a href="#founders">Founders</a>
   <a href="#plans">Plans</a>
   <a href="#faq">FAQ</a>
-  <a class="btn btn-brass" href="#waitlist">Join the waitlist</a>
+  <a class="btn btn-brass" href="#founders">Reserve for $499</a>
 </nav>
 
 <main id="main">
@@ -104,7 +106,7 @@
       <h1 class="d1">Security that doesn't just watch. <span class="g">It defends.</span></h1>
       <p class="lede">Sentinel, an autonomous patrol drone, sweeps your property line day and night. Guardian, a quiet robot, checks every room inside. On-device AI verifies real threats, and the system works to stop intruders before a door is touched.</p>
       <div class="ctas">
-        <a class="btn btn-brass" href="#waitlist">Join the waitlist</a>
+        <a class="btn btn-brass" href="#founders">Reserve for $499</a>
         <a class="btn btn-ghost" href="#how">See how it works</a>
       </div>
       <div class="creds">
@@ -497,6 +499,56 @@
   </div>
 </section>
 
+<!-- ============ FOUNDERS ============ -->
+<section class="sec on-slate fd" id="founders">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">Founders reservation</p>
+        <h2 class="d2">The first 2,000 homes. <span class="g">$499 holds yours.</span></h2>
+      </div>
+      <p class="lede">Reserve AeroHome Complete, our top kit with the Sentinel drone, the Guardian robot and the Hub, for $1,999 instead of $2,299. Founders also lock in a lower monthly rate for as long as they keep their service.</p>
+    </div>
+    <div class="fd-grid">
+      <ol class="fd-steps">
+        <li><span class="fd-n" aria-hidden="true">01</span><div><small>Today</small><h3 class="d3">Reserve for $499</h3><p>Your deposit holds your kit and your founders rates, and it counts toward the price of the kit. It’s fully refundable until installation.</p></div></li>
+        <li><span class="fd-n" aria-hidden="true">02</span><div><small>Within 90 days</small><h3 class="d3">We install it</h3><p>We set up AeroHome Complete at your home. Monthly payments start on install day: the rest of your kit at $62.50 a month for 24 months, 0% APR, plus your plan.</p></div></li>
+        <li><span class="fd-n" aria-hidden="true">03</span><div><small>After 24 payments</small><h3 class="d3">The kit is yours</h3><p>Your bill drops to your founders plan rate, and that rate stays locked while your service stays active.</p></div></li>
+      </ol>
+      <div class="fd-card" id="fd-card" data-links="{{SQUARE}}">
+        <p class="fd-k">AeroHome Complete · Founders</p>
+        <p class="fd-kit"><b>$1,999</b><s><span class="sr-only">Regular price </span>$2,299</s></p>
+        <p class="fd-kit-s">Sentinel drone and Nest dock, Guardian robot, and Hub</p>
+        <fieldset class="fd-plans">
+          <legend>Choose your plan</legend>
+          <div class="fd-opts">
+            <label><input type="radio" name="fd-plan" value="Essential"><span><b>Essential</b><em>$39<small>/mo</small></em><s><span class="sr-only">Regular price </span>$49</s></span></label>
+            <label><input type="radio" name="fd-plan" value="Plus"><span><b>Plus</b><em>$69<small>/mo</small></em><s><span class="sr-only">Regular price </span>$89</s></span></label>
+            <label><input type="radio" name="fd-plan" value="Total" checked><span><b>Total</b><em>$119<small>/mo</small></em><s><span class="sr-only">Regular price </span>$149</s></span></label>
+          </div>
+        </fieldset>
+        <dl class="fd-out" aria-live="polite">
+          <dt>Today</dt><dd>$499</dd>
+          <dt>Months 1 to 24<span data-fd="split">Kit $62.50 + Total $119</span></dt><dd data-fd="pay">$181.50/mo</dd>
+          <dt>Month 25 on<span>Plan only, locked</span></dt><dd data-fd="after">$119/mo</dd>
+          <div class="fd-save" style="display:contents"><dt>You save in the first two years</dt><dd data-fd="save">$1,020</dd></div>
+        </dl>
+        <form class="fd-go" id="fd-go" novalidate>
+          <label for="fd-zip">Your ZIP code</label>
+          <div class="fd-row"><input id="fd-zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="85004" aria-describedby="fd-msg"><button class="btn btn-brass" type="submit">Reserve for $499</button></div>
+          <p class="fd-msg" id="fd-msg" aria-live="polite"></p>
+        </form>
+        <p class="fd-sec"><svg aria-hidden="true"><use href="#i-lock"/></svg>Secure checkout by Square</p>
+      </div>
+    </div>
+    <div class="fd-terms">
+      <h3>Founders reservation terms</h3>
+      <p>Founders pricing is limited to the first 2,000 reservations, one per home, in the Phoenix and Dallas–Fort Worth pilot areas. AeroHome Complete is $1,999 for founders: a $499 deposit today, then 24 monthly kit payments of $62.50 at 0% APR, starting on your installation date and billed with your plan. Founders plan rates of $39 (Essential), $69 (Plus) and $119 (Total) a month stay locked while your service stays active.</p>
+      <p>Your deposit is fully refundable any time before installation. We aim to install within 90 days of your reservation. If we can’t, we’ll give you a new date, and you can keep your place or take a full refund. AeroHome equipment is subject to FCC rules, and delivery and installation are conditional on the equipment receiving FCC authorization. If authorization is not obtained, we’ll refund your deposit in full. FCC rules do not address consumer-protection, contract or other federal or state laws that may apply to this sale.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ PLANS ============ -->
 <section class="sec on-light" id="plans">
   <div class="wrap">
@@ -674,15 +726,17 @@
       <div class="row"><a class="btn btn-ink" href="mailto:info@aeroassist.us?subject=AeroHome%20question">Email us</a><a class="btn btn-line" href="#waitlist">Join the waitlist</a></div>
     </div>
     <div>
-      <details class="qa"><summary>Where and when can I get AeroHome?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>AeroHome launches in 2026 as a pilot program in Phoenix and Dallas–Fort Worth, limited to the first 500 homes. Join the waitlist to hold a place. If you live elsewhere, choose “Elsewhere, notify me” and we'll tell you when AeroHome reaches your area.</p></details>
+      <details class="qa"><summary>Where and when can I get AeroHome?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>AeroHome launches as a pilot program in Phoenix and Dallas–Fort Worth. Founders reservations are open now for the first 2,000 homes, with installation within 90 days of reserving. If you live elsewhere, choose “Elsewhere, notify me” and we'll tell you when AeroHome reaches your area.</p></details>
       <details class="qa"><summary>What does it cost?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Hardware is $999 for the Guardian Kit, $1,499 for the Sentinel Kit or $2,299 for AeroHome Complete, and any kit can be financed over 36 months. Plans are $49, $89 or $149 a month. Use <a href="#build">Build your setup</a> to see a first-year total.</p></details>
+      <details class="qa"><summary>How does the Founders reservation work?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Pay $499 to reserve AeroHome Complete at the founders price of $1,999. We install within 90 days. From install day you pay the rest of the kit, $62.50 a month for 24 months at 0% APR, plus your plan at the founders rate: $39, $69 or $119 a month. After 24 payments the kit is paid off, and you pay only your plan, at the founders rate, for as long as you keep your service. See <a href="#founders">Founders reservation</a>.</p></details>
+      <details class="qa"><summary>Can I get my $499 back?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Yes. Your deposit is fully refundable any time before installation. If we can’t install within 90 days, or the equipment doesn’t receive FCC authorization, you can take a full refund.</p></details>
       <details class="qa"><summary>Will it wake me up every time a raccoon crosses the yard?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>No. The Hub's on-device AI sorts every detection into person, vehicle, animal or package. You're alerted when a real person is verified, not for every motion event.</p></details>
       <details class="qa"><summary>Can I share footage with police?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Yes. One tap calls 911, and your address, a live-feed link and a documented 4K and thermal evidence package are ready for the officers who respond. The Total plan adds video-verified alarm reporting, which many police departments prioritize. Otherwise, your footage is released only by you or under a lawful order.</p></details>
       <details class="qa"><summary>Does the drone fly over my neighbors?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>No. Sentinel is geofenced to your property and never crosses your property line. Anything the camera sees beyond it is blurred at capture.</p></details>
       <details class="qa"><summary>What happens if someone cuts the power or the internet?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>The Hub has cellular and battery backup and records locally, so cutting the power or the internet line keeps the system running on backup.</p></details>
       <details class="qa"><summary>Will the robot go into bedrooms?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Not by default. Bedrooms are no-go zones enforced on the device, and Guardian's camera has a physical shutter you can see.</p></details>
       <details class="qa"><summary>Will it lower my home-insurance premium?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>It may. Many insurers discount premiums 5 to 15% for verified, monitored systems, and the Total plan includes 24/7 professional monitoring and an insurance documentation pack. Check with your carrier for your exact discount.</p></details>
-      <details class="qa"><summary>What do waitlist members get?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>Priority installation, founder pricing and 60 days of the Total plan, free. Joining the waitlist is free and doesn't commit you to buy.</p></details>
+      <details class="qa"><summary>What do waitlist members get?<i><svg aria-hidden="true"><use href="#i-plus"/></svg></i></summary><p>First word when AeroHome reaches your area, and a Founders reservation if spots remain. Joining the waitlist is free and doesn't commit you to buy.</p></details>
     </div>
   </div>
 </section>
@@ -691,13 +745,13 @@
 <section class="sec on-dark wl" id="waitlist">
   <div class="wrap wl-grid">
     <div>
-      <p class="kicker">2026 pilot program</p>
-      <h2 class="d2">Be one of the <span class="g">first 500 homes.</span></h2>
+      <p class="kicker">Free waitlist</p>
+      <h2 class="d2">Not ready to reserve? <span class="g">Join the waitlist.</span></h2>
       <p class="lede">AeroHome launches in Phoenix and <span class="nw">Dallas–Fort Worth</span>. Waitlist members get:</p>
       <ul class="perks">
-        <li><svg aria-hidden="true"><use href="#i-star"/></svg>Priority installation</li>
-        <li><svg aria-hidden="true"><use href="#i-star"/></svg>Founder pricing</li>
-        <li><svg aria-hidden="true"><use href="#i-star"/></svg>60 days of the Total plan, free</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>First word when AeroHome reaches your area</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>A Founders reservation if spots remain</li>
+        <li><svg aria-hidden="true"><use href="#i-star"/></svg>No payment and no commitment</li>
       </ul>
       <div class="metros">
         <div class="metro"><b>Phoenix</b><span>Arizona</span><br><em>Enrolling</em></div>
@@ -732,7 +786,7 @@
       <div class="sent" role="status">
         <span class="ok"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
         <h3 class="d3" id="sent-h" tabindex="-1">You're on the list.</h3>
-        <p>Thanks for joining the AeroHome pilot waitlist. We'll email you when installation opens in your area, along with your founder pricing.</p>
+        <p>Thanks for joining the AeroHome pilot waitlist. We'll email you when installation opens in your area, and whether Founders spots remain.</p>
         <button class="btn btn-ink btn-sm share-btn" type="button" id="share">Share with a neighbor</button>
         <p class="share-note" id="share-note" aria-live="polite"></p>
       </div>
@@ -761,7 +815,7 @@
       <div class="reg-grid">
         <article class="ok"><b>NDAA §848</b><em>Compliant</em><p>Secure supply chain with no covered foreign-made drone components, per Section 848 of the FY2020 National Defense Authorization Act.</p></article>
         <article><b>FAA</b><em>Part 107 and Remote ID</em><p>Sentinel is built to fly under FAA rules and broadcasts Remote ID. We secure any FAA approvals a home needs before its first flight.</p></article>
-        <article><b>FCC</b><em>Part 15, in certification</em><p>This device has not been authorized as required by the rules of the Federal Communications Commission. This device is not, and may not be, offered for sale or lease, or sold or leased, until authorization is obtained.</p></article>
+        <article><b>FCC</b><em>Part 15, in certification</em><p>AeroHome equipment is subject to FCC rules, and delivery to customers is conditional on FCC equipment authorization. FCC rules do not address consumer-protection, contract or other federal or state laws that may apply to a sale. If authorization is not obtained, Founders deposits are refunded in full.</p></article>
         <article><b>CE</b><em>Planned for EU</em><p>CE conformity is planned for any future EU sale. The CE mark is not shown or claimed today.</p></article>
       </div>
     </div>
@@ -784,7 +838,7 @@
   </div>
 </footer>
 
-<div class="mbar" id="mbar" aria-hidden="true"><span><b>2026 pilot</b> Phoenix and DFW</span><a class="btn btn-brass btn-sm" href="#waitlist" tabindex="-1">Join the waitlist</a></div>
+<div class="mbar" id="mbar" aria-hidden="true"><span><b>Founders</b> First 2,000 homes</span><a class="btn btn-brass btn-sm" href="#founders" tabindex="-1">Reserve for $499</a></div>
 <button class="totop" type="button" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
 <script src="assets/js/site.js?v={{V}}" defer></script>

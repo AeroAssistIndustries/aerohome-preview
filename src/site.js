@@ -319,16 +319,72 @@
     Object.keys(map).forEach(function (id) { spy.observe(document.getElementById(id)); });
   }
 
+  /* ---------- founders reservation ---------- */
+  var FD = { reg: 2299, kit: 1999, dep: 499, n: 24, plans: { Essential: [39, 49], Plus: [69, 89], Total: [119, 149] } };
+  var fd = $('#fd-card');
+  if (fd) {
+    var links = {};
+    try { links = JSON.parse(fd.getAttribute('data-links') || '{}') || {}; } catch (e) { links = {}; }
+    var inst = (FD.kit - FD.dep) / FD.n;
+    var cash = function (n) { return '$' + (Math.round(n * 100) % 100 ? n.toFixed(2) : Math.round(n).toLocaleString('en-US')); };
+    var fdPlan = function () { return ($('input[name=fd-plan]:checked', fd) || {}).value || 'Total'; };
+    var fdSet = function (k, v) { var el = $('[data-fd=' + k + ']', fd); if (el) el.textContent = v; };
+    var fdCalc = function () {
+      var name = fdPlan(), p = FD.plans[name];
+      fdSet('split', 'Kit ' + cash(inst) + ' + ' + name + ' ' + cash(p[0]));
+      fdSet('pay', cash(inst + p[0]) + '/mo');
+      fdSet('after', cash(p[0]) + '/mo');
+      fdSet('save', cash((FD.reg - FD.kit) + FD.n * (p[1] - p[0])));
+    };
+    $$('input[name=fd-plan]', fd).forEach(function (i) { i.addEventListener('change', fdCalc); });
+    fdCalc();
+    var fdZip = $('#fd-zip'), fdMsg = $('#fd-msg');
+    fdZip.addEventListener('input', function () {
+      var d = fdZip.value.replace(/\D/g, '').slice(0, 5); if (d !== fdZip.value) fdZip.value = d;
+      fdZip.removeAttribute('aria-invalid'); fdMsg.className = 'fd-msg'; fdMsg.textContent = '';
+    });
+    $('#fd-go').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var v = fdZip.value.replace(/\D/g, ''), plan = fdPlan();
+      fdMsg.className = 'fd-msg'; fdMsg.textContent = '';
+      if (!/^\d{5}$/.test(v)) { fdMsg.textContent = 'Enter your 5-digit ZIP code.'; fdMsg.classList.add('bad'); fdZip.setAttribute('aria-invalid', 'true'); fdZip.focus(); return; }
+      var area = areaFor(v);
+      $('#f-zip').value = v; $('#f-hw').value = 'AeroHome Complete'; $('#f-plan').value = plan;
+      if (!area) {
+        $('#f-metro').value = 'Elsewhere, notify me';
+        fdMsg.innerHTML = '';
+        fdMsg.appendChild(document.createTextNode(v + ' isn’t in a pilot area yet, so we can’t take a reservation there. '));
+        var a = document.createElement('a'); a.href = '#waitlist'; a.textContent = 'Join the free waitlist'; fdMsg.appendChild(a);
+        fdMsg.appendChild(document.createTextNode(' and we’ll tell you when AeroHome reaches you.'));
+        fdMsg.classList.add('bad');
+        return;
+      }
+      $('#f-metro').value = area;
+      var url = links[plan] || links['*'];
+      if (url) {
+        fdMsg.textContent = 'Opening secure checkout…'; fdMsg.classList.add('good');
+        window.location.href = url;
+        return;
+      }
+      fdMsg.textContent = 'You’re in our ' + (area.indexOf('Phoenix') === 0 ? 'Phoenix' : 'Dallas–Fort Worth') + ' pilot area. Checkout opens shortly: add your name and email below, and we’ll send your reservation link first.';
+      fdMsg.classList.add('good');
+      setTimeout(function () {
+        $('#waitlist').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        setTimeout(function () { $('#f-name').focus({ preventScroll: true }); }, 500);
+      }, 1400);
+    });
+  }
+
   /* ---------- phone bar: shows between the hero and the waitlist ---------- */
   var mbar = $('#mbar');
   if (mbar && 'IntersectionObserver' in window) {
     var seen = {};
     var mo = new IntersectionObserver(function (es) {
       es.forEach(function (en) { seen[en.target.id || en.target.tagName] = en.isIntersecting; });
-      var show = !seen.top && !seen.waitlist && !seen.FOOTER && !document.body.classList.contains('menu-open');
+      var show = !seen.top && !seen.founders && !seen.waitlist && !seen.FOOTER && !document.body.classList.contains('menu-open');
       mbar.classList.toggle('show', show);
     }, { threshold: 0 });
-    ['#top', '#waitlist', 'footer'].forEach(function (s) { var el = $(s); if (el) mo.observe(el); });
+    ['#top', '#founders', '#waitlist', 'footer'].forEach(function (s) { var el = $(s); if (el) mo.observe(el); });
   }
 
   /* load the 3D scenes once the page itself has finished loading */
