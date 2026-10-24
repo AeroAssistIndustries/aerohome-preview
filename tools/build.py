@@ -183,14 +183,14 @@ def main():
         if os.path.exists(os.path.join(ROOT, f)): shutil.copy(os.path.join(ROOT, f), os.path.join(LEGAL_SRC, f))
     idx = render(read(os.path.join(SRC, 'index.html')))
     write(os.path.join(ROOT, 'index.html'), idx)
-    write(os.path.join(ROOT, 'privacy.html'), legal_page(idx, 'Privacy Policy', 'What AeroHome collects through this website and the waitlist, how it is used, and the choices you have.', 'privacy.html', 'privacy.html'))
-    write(os.path.join(ROOT, 'terms.html'), legal_page(idx, 'Terms of Use', 'The rules for using the AeroHome website and joining the pilot-program waitlist.', 'terms.html', 'terms.html'))
+    write(os.path.join(ROOT, 'privacy.html'), legal_page(idx, 'Privacy Policy', 'What AeroHome collects through this website and the waitlist, how it is used, and the choices you have.', 'privacy.html', 'privacy'))
+    write(os.path.join(ROOT, 'terms.html'), legal_page(idx, 'Terms of Use', 'The rules for using the AeroHome website and joining the pilot-program waitlist.', 'terms.html', 'terms'))
     write(os.path.join(ROOT, '404.html'), not_found(idx))
     open(os.path.join(ROOT, '.nojekyll'), 'w').close()
     if LAUNCH:
         write(os.path.join(ROOT, 'robots.txt'), f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n")
         today = time.strftime('%Y-%m-%d')
-        urls = ''.join(f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>\n" for p in ['', 'privacy.html', 'terms.html'])
+        urls = ''.join(f"  <url><loc>{SITE}{p}</loc><lastmod>{today}</lastmod></url>\n" for p in ['', 'privacy', 'terms'])
         write(os.path.join(ROOT, 'sitemap.xml'), f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>\n')
         # hosted on Cloudflare Pages with the custom domain set there, so no GitHub Pages CNAME file
         if os.path.exists(os.path.join(ROOT, 'CNAME')): os.remove(os.path.join(ROOT, 'CNAME'))
@@ -199,6 +199,13 @@ def main():
         for f in ['sitemap.xml', 'CNAME']:
             if os.path.exists(os.path.join(ROOT, f)): os.remove(os.path.join(ROOT, f))
     write(os.path.join(ROOT, 'site.webmanifest'), '{"name":"AeroHome","short_name":"AeroHome","start_url":"./","display":"browser","background_color":"#0b0f19","theme_color":"#0b0f19","icons":[{"src":"assets/img/icon-192.png","sizes":"192x192","type":"image/png"},{"src":"assets/img/icon-512.png","sizes":"512x512","type":"image/png"}]}\n')
+    # clean URLs (Cloudflare Pages serves /privacy for privacy.html and redirects the .html form)
+    if LAUNCH:
+        for f in ['index.html', 'privacy.html', 'terms.html', '404.html']:
+            fp = os.path.join(ROOT, f); s = read(fp)
+            s = s.replace('href="privacy.html"', 'href="privacy"').replace('href="terms.html"', 'href="terms"')
+            s = s.replace('href="index.html#', 'href="./#').replace('href="index.html"', 'href="./"')
+            write(fp, s)
     # contact address, switched in one place
     if EMAIL != 'info@aeroassist.us':
         for f in ['index.html', 'privacy.html', 'terms.html', '404.html', 'assets/js/site.js']:
